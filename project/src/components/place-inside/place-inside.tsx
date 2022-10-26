@@ -1,0 +1,18 @@
+type PlaceInsideProps = {
+  goods: string[];
+}
+
+function PlaceInside({ goods }: PlaceInsideProps): JSX.Element {
+  let id = 1;
+
+  return (
+    <div className="property__inside">
+      <h2 className="property__inside-title">What&apos;s inside</h2>
+      <ul className="property__inside-list">
+        {goods.map((stuff): JSX.Element => <li className="property__inside-item" key={id++}>{stuff}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+export default PlaceInside;
