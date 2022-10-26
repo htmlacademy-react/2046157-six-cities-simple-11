@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import PlaceGalery from '../../components/place-galery/place-galery';
 import PlaceHost from '../../components/place-host/place-host';
-import PlaceInside from '../../components/place-inside/place-inside';
+import PlaceEquipment from '../../components/place-equipment/place-equipment';
 import PlaceReviews from '../../components/place-reviews/place-reviews';
 import PlacesNearby from '../../components/places-nearby/places-nearby';
 
@@ -43,7 +43,7 @@ function PlaceScreen({ place, user }: PlaceScreenProps): JSX.Element {
                 <b className="property__price-value">&euro;{place.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
-              <PlaceInside goods={place.goods} />
+              <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
               <PlaceReviews user={user} />
             </div>

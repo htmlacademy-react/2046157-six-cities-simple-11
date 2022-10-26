@@ -1,8 +1,8 @@
-type PlaceInsideProps = {
+type PlaceEquipmentProps = {
   goods: string[];
 }
 
-function PlaceInside({ goods }: PlaceInsideProps): JSX.Element {
+function PlaceEquipment({ goods }: PlaceEquipmentProps): JSX.Element {
   let id = 1;
 
   return (
@@ -15,4 +15,4 @@ function PlaceInside({ goods }: PlaceInsideProps): JSX.Element {
   );
 }
 
-export default PlaceInside;
+export default PlaceEquipment;

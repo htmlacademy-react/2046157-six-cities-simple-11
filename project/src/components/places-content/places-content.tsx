@@ -3,12 +3,12 @@ import PlacesSortTab from '../places-sort-tab/places-sort-tab';
 
 import { Place } from '../../types/data';
 
-type PlacesListProps = {
+type PlacesContentProps = {
   placesCount: number;
   places: Place[];
 }
 
-function PlacesContent(props: PlacesListProps): JSX.Element {
+function PlacesContent(props: PlacesContentProps): JSX.Element {
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">

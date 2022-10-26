@@ -1,4 +1,4 @@
-function UserAuthInfo() {
+function UserAuthInfo(): JSX.Element {
   return (
     <div className="header__nav-profile">
       <div className="header__avatar-wrapper user__avatar-wrapper"></div>

@@ -262,3 +262,6 @@ export const placesData = [
     id: 5
   }
 ];
+
+
+export const placesCountData = 312;

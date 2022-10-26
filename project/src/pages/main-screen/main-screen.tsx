@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
 import PlacesContent from '../../components/places-content/places-content';
-import EmptyPlacesList from '../../components/emty-places-list/empty-places-list';
+import PlacesContentEmpty from '../../components/places-content-empty/places-content-empty';
 
 import { User, Place } from '../../types/data';
 
@@ -21,7 +21,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <div className="cities">
           {props.places.length ?
             <PlacesContent placesCount={props.placesCount} places={props.places} /> :
-            <EmptyPlacesList />}
+            <PlacesContentEmpty />}
         </div>
       </main>
     </div>

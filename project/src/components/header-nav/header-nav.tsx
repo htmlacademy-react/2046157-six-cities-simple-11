@@ -1,4 +1,4 @@
-import UserAuthInfo from '../user-auth-info/user-auth.info';
+import UserAuthInfo from '../user-auth-info/user-auth-info';
 
 import { User } from '../../types/data';
 
