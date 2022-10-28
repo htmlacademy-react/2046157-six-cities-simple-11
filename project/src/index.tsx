@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
+import { placesData, placesCountData } from './mocks/places';
+import { placeData } from './mocks/place';
+import { userData } from './mocks/user';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 root.render(
   <React.StrictMode>
-    <App />
+    <App user={userData} placesCount={placesCountData} places={placesData} place={placeData} />
   </React.StrictMode>,
 );
