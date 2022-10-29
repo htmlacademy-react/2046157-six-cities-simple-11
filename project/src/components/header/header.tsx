@@ -1,6 +1,9 @@
+import { useLocation } from 'react-router-dom';
+
 import HeaderNav from '../header-nav/header-nav';
 import Logo from '../logo/logo';
 
+import { AppRoute } from '../../types/paths';
 import { User } from '../../types/data';
 
 type HeaderProps = {
@@ -8,6 +11,7 @@ type HeaderProps = {
 }
 
 function Header({ user }: HeaderProps): JSX.Element {
+  const isNotLoginPage = useLocation().pathname !== AppRoute.Login;
 
   return (
     <header className="header">
@@ -16,7 +20,7 @@ function Header({ user }: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          <HeaderNav user={user} />
+          {isNotLoginPage && <HeaderNav user={user} />}
         </div>
       </div>
     </header>

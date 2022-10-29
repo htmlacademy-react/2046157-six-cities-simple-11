@@ -1,41 +1,44 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../types/paths';
+
 function CitiesTabs(): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="/">
+            <Link to={AppRoute.Root} className="locations__item-link tabs__item">
               <span>Paris</span>
-            </a>
+            </Link>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="/">
+            <Link to={AppRoute.Root} className="locations__item-link tabs__item">
               <span>Cologne</span>
-            </a>
+            </Link>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="/">
+            <Link to={AppRoute.Root} className="locations__item-link tabs__item">
               <span>Brussels</span>
-            </a>
+            </Link>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item tabs__item--active">
+            <Link to={AppRoute.Root} className="locations__item-link tabs__item tabs__item--active">
               <span>Amsterdam</span>
-            </a>
+            </Link>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="/">
+            <Link to={AppRoute.Root} className="locations__item-link tabs__item">
               <span>Hamburg</span>
-            </a>
+            </Link>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="/">
+            <Link to={AppRoute.Root} className="locations__item-link tabs__item">
               <span>Dusseldorf</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </section>
-    </div>
+    </div >
   );
 }
 

@@ -1,4 +1,12 @@
-function PlaceReviewComment(): JSX.Element {
+import StarRating from '../star-rating/star-rating';
+
+import { Place } from '../../types/data';
+
+type PlaceReviewCommentProps = {
+  rating: Place['rating'];
+}
+
+function PlaceReviewComment({ rating }: PlaceReviewCommentProps): JSX.Element {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -10,12 +18,7 @@ function PlaceReviewComment(): JSX.Element {
         </span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <StarRating rating={rating} blockName={'reviews'} showRatingValue={false} />
         <p className="reviews__text">
           A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
           building is green and from 18th century.

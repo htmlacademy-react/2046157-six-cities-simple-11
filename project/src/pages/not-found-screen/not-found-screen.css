@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700");
+.container--not-found {
+	height: 100vh;
+	font-family: "Montserrat", "sans-serif";
+	font-weight: bolder;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.container--not-found a {
+	color: black;
+}
+
+.container--not-found a:hover {
+  text-decoration: underline;
+}
