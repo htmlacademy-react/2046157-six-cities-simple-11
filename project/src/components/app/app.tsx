@@ -13,7 +13,6 @@ type AppProps = {
   places: Place[];
   placesCount: number;
   user: User;
-  place: Place;
 }
 
 function App(props: AppProps): JSX.Element {
@@ -23,7 +22,7 @@ function App(props: AppProps): JSX.Element {
         <Route path={AppRoute.Root} element={<Layout user={props.user} />}>
           <Route index element={<MainScreen placesCount={props.placesCount} places={props.places} />} />
           <Route path={AppRoute.Login} element={props.user.id ? <Navigate to={AppRoute.Root} /> : <LoginScreen />} />
-          <Route path={`${AppRoute.Place}/:id`} element={<PlaceScreen place={props.place} user={props.user} />} />
+          <Route path={`${AppRoute.Place}/:id`} element={<PlaceScreen places={props.places} user={props.user} />} />
         </Route>
         <Route path='*' element={<NotFoundScreen />} />
       </Routes>

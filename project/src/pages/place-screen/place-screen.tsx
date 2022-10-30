@@ -1,3 +1,5 @@
+import { Navigate, useParams } from 'react-router-dom';
+
 import PlaceGalery from '../../components/place-galery/place-galery';
 import PlaceHost from '../../components/place-host/place-host';
 import PlaceEquipment from '../../components/place-equipment/place-equipment';
@@ -9,10 +11,19 @@ import { User, Place } from '../../types/data';
 
 type PlaceScreenProps = {
   user: User;
-  place: Place;
+  places: Place[];
 }
 
-function PlaceScreen({ place, user }: PlaceScreenProps): JSX.Element {
+function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
+  const id = Number(useParams().id);
+  const place: Place | undefined = places.find((element) => element.id === id);
+
+  if (!place) {
+    return (
+      <Navigate replace to="/" />
+    );
+  }
+
   return (
     <main className="page__main page__main--property">
       <section className="property">
