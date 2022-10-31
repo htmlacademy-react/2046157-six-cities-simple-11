@@ -1,5 +1,6 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PlaceGalery from '../../components/place-galery/place-galery';
 import PlaceHost from '../../components/place-host/place-host';
 import PlaceEquipment from '../../components/place-equipment/place-equipment';
@@ -20,7 +21,7 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
 
   if (!place) {
     return (
-      <Navigate replace to="/" />
+      <NotFoundScreen />
     );
   }
 
