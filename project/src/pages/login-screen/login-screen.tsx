@@ -1,3 +1,5 @@
+import { Helmet } from 'react-helmet-async';
+
 import Header from '../../components/header/header';
 
 import { User } from '../../types/data';
@@ -9,7 +11,11 @@ type LoginScreenProps = {
 function LoginScreen({ user }: LoginScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      <Header user={user}/>
+      <Helmet>
+        <title>Sign in - six cities simple</title>
+        <meta name="description" content="Sign in six cities simple" />
+      </Helmet>
+      <Header user={user} />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -28,7 +34,7 @@ function LoginScreen({ user }: LoginScreenProps): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <a className="locations__item-link" href="/">
                 <span>Amsterdam</span>
               </a>
             </div>

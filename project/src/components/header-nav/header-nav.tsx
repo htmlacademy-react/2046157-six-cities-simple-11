@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../types/paths';
+
 import UserAuthInfo from '../user-auth-info/user-auth-info';
 
 import { User } from '../../types/data';
@@ -14,9 +17,9 @@ function HeaderNav({ user }: HeaderNavProps): JSX.Element {
           {user.id && <UserAuthInfo />}
         </li>
         <li className="header__nav-item">
-          <a className="header__nav-link" href="/">
+          <Link to={AppRoute.Login} className="header__nav-link" >
             <span className="header__signout">{user.id ? 'Sign out' : 'Sign up'}</span>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

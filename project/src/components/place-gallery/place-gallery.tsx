@@ -1,8 +1,8 @@
-type PlaceGaleryProps = {
+type PlaceGalleryProps = {
   images: string[];
 }
 
-function PlaceGalery({ images }: PlaceGaleryProps): JSX.Element {
+function PlaceGallery({ images }: PlaceGalleryProps): JSX.Element {
   let id = 1;
   const cuttedImages = images.slice(0, 6);
 
@@ -19,4 +19,4 @@ function PlaceGalery({ images }: PlaceGaleryProps): JSX.Element {
   );
 }
 
-export default PlaceGalery;
+export default PlaceGallery;

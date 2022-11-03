@@ -1,25 +1,43 @@
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+
 import Header from '../../components/header/header';
-import PlaceGalery from '../../components/place-galery/place-galery';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import PlaceGallery from '../../components/place-gallery/place-gallery';
 import PlaceHost from '../../components/place-host/place-host';
 import PlaceEquipment from '../../components/place-equipment/place-equipment';
 import PlaceReviews from '../../components/place-reviews/place-reviews';
 import PlacesNearby from '../../components/places-nearby/places-nearby';
+import StarRating from '../../components/star-rating/star-rating';
 
 import { User, Place } from '../../types/data';
 
 type PlaceScreenProps = {
   user: User;
-  place: Place;
+  places: Place[];
 }
 
-function PlaceScreen({ place, user }: PlaceScreenProps): JSX.Element {
+function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
+  const id = Number(useParams().id);
+  const place = places.find((element) => element.id === id);
+
+  if (!place) {
+    return (
+      <NotFoundScreen />
+    );
+  }
+
   return (
     <div className="page">
+      <Helmet>
+        <title>{place.title}</title>
+        <meta name="descripton" content={place.description}></meta>
+      </Helmet>
       <Header user={user} />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <PlaceGalery images={place.images} />
+            <PlaceGallery images={place.images} />
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
@@ -27,13 +45,7 @@ function PlaceScreen({ place, user }: PlaceScreenProps): JSX.Element {
               <div className="property__name-wrapper">
                 <h1 className="property__name">{place.title}</h1>
               </div>
-              <div className="property__rating rating">
-                <div className="property__stars rating__stars">
-                  <span style={{ width: `${Math.floor(place.rating) * 20}%` }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="property__rating-value rating__value">{place.rating}</span>
-              </div>
+              <StarRating rating={place.rating} blockName={'property'} showRatingValue />
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">{place.type[0].toLocaleUpperCase() + place.type.slice(1)}</li>
                 <li className="property__feature property__feature--bedrooms">{place.bedrooms} Bedrooms</li>
@@ -45,7 +57,7 @@ function PlaceScreen({ place, user }: PlaceScreenProps): JSX.Element {
               </div>
               <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews user={user} />
+              <PlaceReviews user={user} rating={place.rating} />
             </div>
           </div>
           <section className="property__map map"></section>
