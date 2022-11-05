@@ -1,5 +1,5 @@
 import PlaceReviewComment from '../place-review-comment/place-review-comment';
-import PlaceReviewForm from '../place-review-form/place-review-form';
+import PlaceReviewsForm from '../place-reviews-form/place-reviews-form';
 
 import { User, Place } from '../../types/data';
 
@@ -15,7 +15,7 @@ function PlaceReviews({ user, rating }: PlaceReviewsProps): JSX.Element {
       <ul className="reviews__list">
         <PlaceReviewComment rating={rating} />
       </ul>
-      {user.id && <PlaceReviewForm />}
+      {user.id && <PlaceReviewsForm />}
     </section>
   );
 }

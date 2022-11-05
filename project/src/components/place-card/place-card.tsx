@@ -7,11 +7,23 @@ import { Place } from '../../types/data';
 
 type PlaceCardProps = {
   place: Place;
+  setCurrentPlace: (place: Place | object) => void;
 }
 
-function PlaceCard({ place }: PlaceCardProps): JSX.Element {
+function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
+
+  function handleMouseEvent(e: React.MouseEvent) {
+    if (e.type === 'mouseenter') {
+      setCurrentPlace(place);
+    }
+
+    if (e.type === 'mouseleave') {
+      setCurrentPlace({});
+    }
+  }
+
   return (
-    <article className="cities__card place-card">
+    <article onMouseEnter={handleMouseEvent} onMouseLeave={handleMouseEvent} className="cities__card place-card">
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`${AppRoute.Place}/${place.id}`}>
