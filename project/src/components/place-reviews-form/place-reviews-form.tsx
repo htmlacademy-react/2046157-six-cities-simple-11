@@ -24,10 +24,6 @@ function PlaceReviewsForm(): JSX.Element {
   function handleSubmitEvent(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setFormData({
-      ...formData,
-    });
-
     return formData;
   }
 
@@ -63,7 +59,7 @@ function PlaceReviewsForm(): JSX.Element {
       <div className="reviews__rating-form form__rating">
         {getRatingStars()}
       </div>
-      <textarea onChange={handleChangeEvent} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea onChange={handleChangeEvent} value={formData.review} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
