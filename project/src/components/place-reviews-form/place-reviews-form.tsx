@@ -9,6 +9,8 @@ function PlaceReviewsForm(): JSX.Element {
     date: new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })
   });
 
+  const minSymbolsCount = 50;
+
   type RatingGradationType = {
     [key: string]: string;
   }
@@ -21,13 +23,13 @@ function PlaceReviewsForm(): JSX.Element {
     5: 'perfect'
   } as const;
 
-  function handleSubmitEvent(e: React.FormEvent<HTMLFormElement>) {
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     return formData;
   }
 
-  function handleChangeEvent(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+  function handleFormChange(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
     const { value, name } = e.target;
 
     setFormData({
@@ -36,36 +38,30 @@ function PlaceReviewsForm(): JSX.Element {
     });
   }
 
-  function getRatingStars() {
-    const stars = [];
-
-    for (const ratingIndex in RatingGradation) {
-      stars.push(
-        <PlaceReviewsFormRating
-          handleRatingChangeEvent={handleChangeEvent}
-          ratingIndex={ratingIndex}
-          ratingValue={RatingGradation[ratingIndex]}
-          key={ratingIndex}
-        />
-      );
-    }
-
-    return stars.reverse();
+  function getRatingStars(ratingObj: RatingGradationType) {
+    return Object.entries(ratingObj).map(([ratingIndex, ratingDescription]): JSX.Element => (
+      <PlaceReviewsFormRating
+        handleRatingChangeEvent={handleFormChange}
+        ratingIndex={ratingIndex}
+        ratingDescription={ratingDescription}
+        key={ratingIndex}
+      />
+    )).reverse();
   }
 
   return (
-    <form onSubmit={handleSubmitEvent} className="reviews__form form" action="#" method="post">
+    <form onSubmit={handleFormSubmit} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {getRatingStars()}
+        {getRatingStars(RatingGradation)}
       </div>
-      <textarea onChange={handleChangeEvent} value={formData.review} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea onChange={handleFormChange} value={formData.review} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
-          stay with at least <b className="reviews__text-amount">50 characters</b>.
+          stay with at least <b className="reviews__text-amount">{minSymbolsCount} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formData.rating && formData.review.length >= 50)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!(formData.rating && formData.review.length >= minSymbolsCount)}>Submit</button>
       </div>
     </form>
   );
