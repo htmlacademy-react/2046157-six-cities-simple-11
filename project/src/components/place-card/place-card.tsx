@@ -7,11 +7,21 @@ import { Place } from '../../types/data';
 
 type PlaceCardProps = {
   place: Place;
+  setCurrentPlace: (place: Place | object) => void;
 }
 
-function PlaceCard({ place }: PlaceCardProps): JSX.Element {
+function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
+
+  function handleMouseEnter() {
+    setCurrentPlace(place);
+  }
+
+  function handleMouseLeave() {
+    setCurrentPlace({});
+  }
+
   return (
-    <article className="cities__card place-card">
+    <article onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cities__card place-card">
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`${AppRoute.Place}/${place.id}`}>
