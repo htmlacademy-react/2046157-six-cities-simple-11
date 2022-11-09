@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { User } from '../../types/data';
 
-import { AppRoute } from '../../types/paths';
+import { AppRoute } from '../../consts';
 
 
 type PrivateRouteProps = {

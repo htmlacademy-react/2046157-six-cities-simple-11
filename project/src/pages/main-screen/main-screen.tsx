@@ -5,12 +5,13 @@ import PlacesList from '../../components/places-list/places-list';
 import PlacesListEmpty from '../../components/places-list-empty/places-list-empty';
 import Header from '../../components/header/header';
 
-import { Place, User } from '../../types/data';
+import { Place, User, City } from '../../types/data';
 
 type MainScreenProps = {
   places: Place[];
   placesCount: number;
   user: User;
+  city: City;
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
@@ -27,7 +28,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <div className="cities">
           <div className={`cities__places-container ${props.places.length ? '' : 'cities__places-container--empty'} container`}>
             {props.places.length ?
-              <PlacesList placesCount={props.placesCount} places={props.places} /> :
+              <PlacesList placesCount={props.placesCount} places={props.places} city={props.city} /> :
               <PlacesListEmpty />}
           </div>
         </div>

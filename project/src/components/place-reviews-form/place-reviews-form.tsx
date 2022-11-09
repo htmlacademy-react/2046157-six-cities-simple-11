@@ -9,7 +9,7 @@ function PlaceReviewsForm(): JSX.Element {
     date: new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })
   });
 
-  const minSymbolsCount = 50;
+  const MIN_SYMBOLS_COUNT = 50;
 
   type RatingGradationType = {
     [key: string]: string;
@@ -59,9 +59,9 @@ function PlaceReviewsForm(): JSX.Element {
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
-          stay with at least <b className="reviews__text-amount">{minSymbolsCount} characters</b>.
+          stay with at least <b className="reviews__text-amount">{MIN_SYMBOLS_COUNT} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formData.rating && formData.review.length >= minSymbolsCount)}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!(formData.rating && formData.review.length >= MIN_SYMBOLS_COUNT)}>Submit</button>
       </div>
     </form>
   );

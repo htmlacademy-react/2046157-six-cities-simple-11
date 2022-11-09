@@ -2,16 +2,18 @@ import { useState } from 'react';
 
 import PlaceCard from '../place-card/place-card';
 import PlacesSortTab from '../places-sort-tab/places-sort-tab';
+import Map from '../map/map';
 
-import { Place } from '../../types/data';
+import { Place, City } from '../../types/data';
 
 type PlacesListProps = {
   placesCount: number;
   places: Place[];
+  city: City;
 }
 
 function PlacesList(props: PlacesListProps): JSX.Element {
-  const [, setCurrentPlace] = useState({});
+  const [currentPlace, setCurrentPlace] = useState<Place | null>(null);
 
   return (
     <>
@@ -24,7 +26,7 @@ function PlacesList(props: PlacesListProps): JSX.Element {
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <Map places={props.places} currentPlace={currentPlace} city={props.city} />
       </div>
     </>
   );

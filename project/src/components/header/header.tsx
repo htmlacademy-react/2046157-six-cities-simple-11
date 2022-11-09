@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import HeaderNav from '../header-nav/header-nav';
 import Logo from '../logo/logo';
 
-import { AppRoute } from '../../types/paths';
+import { AppRoute } from '../../consts';
 import { User } from '../../types/data';
 
 type HeaderProps = {

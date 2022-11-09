@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../types/paths';
 
 import StarRating from '../star-rating/star-rating';
 
+import { AppRoute } from '../../consts';
 import { Place } from '../../types/data';
 
 type PlaceCardProps = {
   place: Place;
-  setCurrentPlace: (place: Place | object) => void;
+  setCurrentPlace: (place: Place | null) => void;
 }
 
 function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
@@ -17,7 +17,7 @@ function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
   }
 
   function handleMouseLeave() {
-    setCurrentPlace({});
+    setCurrentPlace(null);
   }
 
   return (

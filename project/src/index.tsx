@@ -4,6 +4,7 @@ import App from './components/app/app';
 
 import { placesData, placesCountData } from './mocks/places';
 import { userData } from './mocks/user';
+import { city } from './mocks/city';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -11,6 +12,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App user={userData} placesCount={placesCountData} places={placesData} />
+    <App user={userData} placesCount={placesCountData} places={placesData} city={city} />
   </React.StrictMode>,
 );
