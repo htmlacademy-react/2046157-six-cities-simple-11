@@ -11,7 +11,6 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { AppRoute } from '../../consts';
 import { Place, User, City } from '../../types/data';
 
-
 type AppProps = {
   places: Place[];
   placesCount: number;
