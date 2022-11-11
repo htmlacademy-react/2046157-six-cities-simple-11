@@ -1,16 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
-import PlacesList from '../../components/places-list/places-list';
-import PlacesListEmpty from '../../components/places-list-empty/places-list-empty';
 import Header from '../../components/header/header';
+import PlacesContent from '../../components/places-content/places-content';
 
-import { Place, User } from '../../types/data';
+import { Place, User, City } from '../../types/data';
+
 
 type MainScreenProps = {
   places: Place[];
   placesCount: number;
   user: User;
+  city: City;
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
@@ -24,13 +25,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
       <main className={`page__main page__main--index ${props.places.length ? '' : 'page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesTabs />
-        <div className="cities">
-          <div className={`cities__places-container ${props.places.length ? '' : 'cities__places-container--empty'} container`}>
-            {props.places.length ?
-              <PlacesList placesCount={props.placesCount} places={props.places} /> :
-              <PlacesListEmpty />}
-          </div>
-        </div>
+        <PlacesContent places={props.places} city={props.city} placesCount={props.placesCount} />
       </main>
     </div>
   );

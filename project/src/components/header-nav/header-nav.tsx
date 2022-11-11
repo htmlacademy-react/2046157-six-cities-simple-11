@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../types/paths';
+import { AppRoute } from '../../consts';
 
 import UserAuthInfo from '../user-auth-info/user-auth-info';
 
