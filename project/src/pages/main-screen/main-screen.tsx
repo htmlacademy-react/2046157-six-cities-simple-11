@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 import CitiesTabs from '../../components/cities-tabs/cities-tabs';
 import Header from '../../components/header/header';
-import PlacesContent from '../../components/places-content/places-content';
+import CityPlaces from '../../components/city-places/city-places';
 
 import { Place, User, City } from '../../types/data';
 
@@ -25,7 +25,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
       <main className={`page__main page__main--index ${props.places.length ? '' : 'page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesTabs />
-        <PlacesContent places={props.places} city={props.city} placesCount={props.placesCount} />
+        <CityPlaces places={props.places} city={props.city} placesCount={props.placesCount} />
       </main>
     </div>
   );

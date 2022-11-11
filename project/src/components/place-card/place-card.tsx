@@ -7,23 +7,15 @@ import { Place } from '../../types/data';
 
 type PlaceCardProps = {
   place: Place;
-  setCurrentPlace: (place: Place | null) => void;
+  classNameWrapper: string;
+  eventHandlers?: object;
 }
 
-function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
-
-  function handleMouseEnter() {
-    setCurrentPlace(place);
-  }
-
-  function handleMouseLeave() {
-    setCurrentPlace(null);
-  }
-
+function PlaceCard({ place, classNameWrapper, eventHandlers }: PlaceCardProps): JSX.Element {
   return (
-    <article onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cities__card place-card">
+    <article {...eventHandlers} className={`${classNameWrapper}__card place-card`}>
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${classNameWrapper}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Place}/${place.id}`}>
           <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place" />
         </Link>
@@ -37,7 +29,7 @@ function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
         </div>
         <StarRating rating={place.rating} blockName={'place-card'} showRatingValue={false} />
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Place}/${place.id}`}>{place.title}</Link>
+          <Link to={`${AppRoute.Place} / ${place.id}`}>{place.title}</Link>
         </h2>
         <p className="place-card__type">{place.type}</p>
       </div>

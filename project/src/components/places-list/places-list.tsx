@@ -1,4 +1,4 @@
-import PlaceCard from '../place-card/place-card';
+import PlaceCardCity from '../place-card-city/place-card-city';
 import PlacesSortTab from '../places-sort-tab/places-sort-tab';
 
 import { Place } from '../../types/data';
@@ -17,7 +17,7 @@ function PlacesList(props: PlacesListProps): JSX.Element {
       <b className="places__found">{props.placesCount} places to stay in Amsterdam</b>
       <PlacesSortTab />
       <div className="cities__places-list places__list tabs__content">
-        {props.places.map((place): JSX.Element => <PlaceCard place={place} key={place.id} setCurrentPlace={props.setCurrentPlace} />)}
+        {props.places.map((place): JSX.Element => <PlaceCardCity place={place} key={place.id} setCurrentPlace={props.setCurrentPlace} />)}
       </div>
     </section>
   );
