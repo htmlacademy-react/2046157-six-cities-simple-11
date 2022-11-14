@@ -7,7 +7,7 @@ type PlaceCardCityProps = {
   setCurrentPlace: (place: Place | null) => void;
 }
 
-function PlaceCardCity({ place, setCurrentPlace }: PlaceCardCityProps) {
+function PlaceCardCity({ place, setCurrentPlace }: PlaceCardCityProps): JSX.Element {
   const eventHandlers = {
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave
@@ -22,7 +22,7 @@ function PlaceCardCity({ place, setCurrentPlace }: PlaceCardCityProps) {
   }
 
   return (
-    <PlaceCard classNameWrapper={'cities'} place={place} eventHandlers={eventHandlers} />
+    <PlaceCard parentClassName={'cities'} place={place} eventHandlers={eventHandlers} />
   );
 }
 

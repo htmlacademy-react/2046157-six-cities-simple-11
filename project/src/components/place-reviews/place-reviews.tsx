@@ -1,5 +1,6 @@
 import PlaceReviewComment from '../place-review-comment/place-review-comment';
 import PlaceReviewsForm from '../place-reviews-form/place-reviews-form';
+import PlaceReviewsList from '../place-reviews-list/place-reviews-list';
 
 import { User, Place } from '../../types/data';
 
@@ -11,10 +12,10 @@ type PlaceReviewsProps = {
 function PlaceReviews({ user, rating }: PlaceReviewsProps): JSX.Element {
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-      <ul className="reviews__list">
+      <PlaceReviewsList>
         <PlaceReviewComment rating={rating} />
-      </ul>
+        <PlaceReviewComment rating={rating} />
+      </PlaceReviewsList>
       {user.id && <PlaceReviewsForm />}
     </section>
   );

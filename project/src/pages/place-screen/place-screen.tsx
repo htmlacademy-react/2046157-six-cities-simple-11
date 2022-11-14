@@ -9,6 +9,11 @@ import PlaceEquipment from '../../components/place-equipment/place-equipment';
 import PlaceReviews from '../../components/place-reviews/place-reviews';
 import PlacesNearby from '../../components/places-nearby/places-nearby';
 import StarRating from '../../components/star-rating/star-rating';
+import PlaceFeatures from '../../components/place-features/place-features';
+import Map from '../../components/map/map';
+
+import { placesNearby } from '../../mocks/places-nearby';
+import { city } from '../../mocks/city';
 
 import { User, Place } from '../../types/data';
 
@@ -36,9 +41,7 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
       <Header user={user} />
       <main className="page__main page__main--property">
         <section className="property">
-          <div className="property__gallery-container container">
-            <PlaceGallery images={place.images} />
-          </div>
+          <PlaceGallery images={place.images} />
           <div className="property__container container">
             <div className="property__wrapper">
               {place.isPremium && <div className="property__mark"><span>Premium</span></div>}
@@ -46,11 +49,7 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
                 <h1 className="property__name">{place.title}</h1>
               </div>
               <StarRating rating={place.rating} blockName={'property'} showRatingValue />
-              <ul className="property__features">
-                <li className="property__feature property__feature--entire">{place.type[0].toLocaleUpperCase() + place.type.slice(1)}</li>
-                <li className="property__feature property__feature--bedrooms">{place.bedrooms} Bedrooms</li>
-                <li className="property__feature property__feature--adults">{place.maxAdults} Max adults</li>
-              </ul>
+              <PlaceFeatures place={place} />
               <div className="property__price">
                 <b className="property__price-value">&euro;{place.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
@@ -60,11 +59,17 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
               <PlaceReviews user={user} rating={place.rating} />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <div className="container">
+            <Map
+              places={placesNearby}
+              city={city}
+              currentPlace={place}
+              parentClassName={'property'}
+              scrollZoom={false}
+            />
+          </div>
         </section>
-        <div className="container">
-          <PlacesNearby />
-        </div>
+        <PlacesNearby placesNearby={placesNearby} />
       </main>
     </div>
   );

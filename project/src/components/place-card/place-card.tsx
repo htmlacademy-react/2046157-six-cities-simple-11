@@ -7,15 +7,17 @@ import { Place } from '../../types/data';
 
 type PlaceCardProps = {
   place: Place;
-  classNameWrapper: string;
-  eventHandlers?: object;
+  parentClassName: string;
+  eventHandlers?: {
+    [key: string]: (e?: React.MouseEvent<HTMLElement>) => void;
+  };
 }
 
-function PlaceCard({ place, classNameWrapper, eventHandlers }: PlaceCardProps): JSX.Element {
+function PlaceCard({ place, parentClassName, eventHandlers }: PlaceCardProps): JSX.Element {
   return (
-    <article {...eventHandlers} className={`${classNameWrapper}__card place-card`}>
+    <article {...eventHandlers} className={`${parentClassName}__card place-card`}>
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className={`${classNameWrapper}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${parentClassName}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Place}/${place.id}`}>
           <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place" />
         </Link>

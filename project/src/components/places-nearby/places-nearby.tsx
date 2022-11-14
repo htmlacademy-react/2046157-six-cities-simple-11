@@ -1,15 +1,20 @@
 import PlaceCard from '../place-card/place-card';
+import { Place } from '../../types/data';
 
-import { placesNearby } from '../../mocks/places-nearby';
+type PlacesNearbyProps = {
+  placesNearby: Place[];
+}
 
-function PlacesNearby(): JSX.Element {
+function PlacesNearby({ placesNearby }: PlacesNearbyProps): JSX.Element {
   return (
-    <section className="near-places places">
-      <h2 className="near-places__title">Other places in the neighbourhood</h2>
-      <div className="near-places__list places__list">
-        {placesNearby.map((place) => <PlaceCard place={place} classNameWrapper={'near-places'} key={place.id} />)}
-      </div>
-    </section>
+    <div className="container">
+      <section className="near-places places">
+        <h2 className="near-places__title">Other places in the neighbourhood</h2>
+        <div className="near-places__list places__list">
+          {placesNearby.map((place) => <PlaceCard place={place} parentClassName={'near-places'} key={place.id} />)}
+        </div>
+      </section>
+    </div>
   );
 }
 

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Icon, Marker } from 'leaflet';
+import { Icon, Layer, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import useMap from '../../hooks/useMap';
@@ -11,6 +11,8 @@ type MapProps = {
   places: Place[];
   currentPlace: Place | null;
   city: City;
+  parentClassName: string;
+  scrollZoom?: boolean;
 }
 
 const defaultCustomIcon = new Icon({
@@ -25,12 +27,20 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ places, currentPlace, city }: MapProps) {
+function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const markers = useRef<Layer[]>([]);
 
   useEffect(() => {
     if (map) {
+      if (markers.current.length) {
+        for (const marker of markers.current) {
+          map.removeLayer(marker);
+          markers.current = [];
+        }
+      }
+
       places.forEach((place: Place) => {
         const marker = new Marker({
           lat: place.location.latitude,
@@ -44,12 +54,18 @@ function Map({ places, currentPlace, city }: MapProps) {
               : defaultCustomIcon
           )
           .addTo(map);
+
+        markers.current.push(marker);
       });
+
+      if (scrollZoom !== undefined && !scrollZoom) {
+        map.scrollWheelZoom.disable();
+      }
     }
-  }, [map, places, currentPlace]);
+  }, [map, places, currentPlace, scrollZoom]);
 
   return (
-    <section className="cities__map map" style={{ height: '800px' }} ref={mapRef}></section>
+    <section className={`${parentClassName}__map map`} ref={mapRef}></section>
   );
 }
 
