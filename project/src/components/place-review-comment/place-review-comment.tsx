@@ -1,29 +1,25 @@
 import StarRating from '../star-rating/star-rating';
 
-import { Place } from '../../types/data';
+import { ReviewComment } from '../../types/data';
 
 type PlaceReviewCommentProps = {
-  rating: Place['rating'];
+  reviewComment: ReviewComment;
 }
 
-function PlaceReviewComment({ rating }: PlaceReviewCommentProps): JSX.Element {
+function PlaceReviewComment({ reviewComment }: PlaceReviewCommentProps): JSX.Element {
+  //с атрибутом dateTime разберусь когда буду знать, в каком формате будет приходить дата с бека.
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={reviewComment.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
-        <span className="reviews__user-name">
-          Max
-        </span>
+        <span className="reviews__user-name">{reviewComment.user.name}</span>
       </div>
       <div className="reviews__info">
-        <StarRating rating={rating} blockName={'reviews'} showRatingValue={false} />
-        <p className="reviews__text">
-          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-          building is green and from 18th century.
-        </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <StarRating rating={reviewComment.rating} blockName={'reviews'} showRatingValue={false} />
+        <p className="reviews__text">{reviewComment.comment}</p>
+        <time className="reviews__time" dateTime="2019-04-24">{reviewComment.date}</time>
       </div>
     </li>
   );

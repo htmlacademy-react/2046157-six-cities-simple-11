@@ -14,6 +14,7 @@ import Map from '../../components/map/map';
 
 import { placesNearby } from '../../mocks/places-nearby';
 import { city } from '../../mocks/city';
+import { reviewComment } from '../../mocks/review-comments';
 
 import { User, Place } from '../../types/data';
 
@@ -56,7 +57,7 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
               </div>
               <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews user={user} rating={place.rating} />
+              <PlaceReviews user={user} reviewComments={reviewComment} />
             </div>
           </div>
           <div className="container">

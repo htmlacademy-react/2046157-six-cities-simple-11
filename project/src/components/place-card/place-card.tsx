@@ -8,12 +8,26 @@ import { Place } from '../../types/data';
 type PlaceCardProps = {
   place: Place;
   parentClassName: string;
-  eventHandlers?: {
-    [key: string]: (e?: React.MouseEvent<HTMLElement>) => void;
-  };
+  setCurrentPlace?: (place: Place | null) => void;
 }
 
-function PlaceCard({ place, parentClassName, eventHandlers }: PlaceCardProps): JSX.Element {
+function PlaceCard({ place, parentClassName, setCurrentPlace }: PlaceCardProps): JSX.Element {
+  type EventHandlerType = {
+    [key: string]: () => void;
+  }
+
+  const eventHandlers: EventHandlerType = {};
+
+  if (setCurrentPlace) {
+    eventHandlers.onMouseEnter = function () {
+      setCurrentPlace(place);
+    };
+
+    eventHandlers.onMouseLeave = function () {
+      setCurrentPlace(null);
+    };
+  }
+
   return (
     <article {...eventHandlers} className={`${parentClassName}__card place-card`}>
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}

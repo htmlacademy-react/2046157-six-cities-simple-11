@@ -1,15 +1,16 @@
+import PlaceReviewComment from '../place-review-comment/place-review-comment';
+
+import { ReviewComment } from '../../types/data';
+
 type PlaceReviewsListProps = {
-  children: JSX.Element[];
+  reviewComments: ReviewComment[];
 }
 
-function PlaceReviewsList({ children }: PlaceReviewsListProps): JSX.Element {
+function PlaceReviewsList({ reviewComments }: PlaceReviewsListProps): JSX.Element {
   return (
-    <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{children.length}</span></h2>
-      <ul className="reviews__list">
-        {children}
-      </ul>
-    </>
+    <ul className="reviews__list">
+      {reviewComments.map((comment) => <PlaceReviewComment reviewComment={comment} key={comment.id} />)}
+    </ul>
   );
 }
 
