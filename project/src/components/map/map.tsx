@@ -32,19 +32,6 @@ function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapPro
   const map = useMap(mapRef, city);
   const markers = useRef<Layer[]>([]);
 
-  //Создаю копию, так как пропсы нельзя изменять/мутировать. Правильно?
-  //Из за этого в useEffect предупреждение, что нехватает параметра, но он там ненужен, так как это копия пропса places, которая будет и так изменяться, когда изменяется пропс places, перерисовывая компонент и вызывая тем самым useEffect, который следит за пропсом places.
-  const placesArr = [...places];
-
-  //или лучше проверять через useParams? Типо, если мы на странице places, то добавить текущий place в массив places, что бы ему добавился красный маркер ниже в ussеEffect в цикле.
-  if (currentPlace) {
-    const isCurrentPlaceInPlaces = placesArr.some((place) => place.title === currentPlace.title);
-
-    if (!isCurrentPlaceInPlaces) {
-      placesArr.push(currentPlace);
-    }
-  }
-
   useEffect(() => {
     if (map) {
       if (markers.current.length) {
@@ -54,7 +41,7 @@ function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapPro
         }
       }
 
-      placesArr.forEach((place: Place) => {
+      places.forEach((place: Place) => {
         const marker = new Marker({
           lat: place.location.latitude,
           lng: place.location.longitude,

@@ -10,7 +10,7 @@ import PlaceReviews from '../../components/place-reviews/place-reviews';
 import PlacesNearby from '../../components/places-nearby/places-nearby';
 import StarRating from '../../components/star-rating/star-rating';
 import PlaceFeatures from '../../components/place-features/place-features';
-import Map from '../../components/map/map';
+import PlaceMap from '../../components/place-map/place-map';
 
 import { placesNearby } from '../../mocks/places-nearby';
 import { city } from '../../mocks/city';
@@ -61,7 +61,7 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
             </div>
           </div>
           <div className="container">
-            <Map
+            <PlaceMap
               places={placesNearby}
               city={city}
               currentPlace={place}
