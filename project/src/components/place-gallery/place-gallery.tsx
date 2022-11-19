@@ -3,8 +3,8 @@ type PlaceGalleryProps = {
 }
 
 function PlaceGallery({ images }: PlaceGalleryProps): JSX.Element {
-  const imagesShowCount = 6;
-  const imagesToShow = images.slice(0, imagesShowCount);
+  const IMAGES_SHOW_COUNT = 6;
+  const imagesToShow = images.slice(0, IMAGES_SHOW_COUNT);
 
   return (
     <div className="property__gallery-container container">

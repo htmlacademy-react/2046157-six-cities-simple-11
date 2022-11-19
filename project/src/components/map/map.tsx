@@ -34,13 +34,6 @@ function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapPro
 
   useEffect(() => {
     if (map) {
-      if (markers.current.length) {
-        for (const marker of markers.current) {
-          map.removeLayer(marker);
-          markers.current = [];
-        }
-      }
-
       places.forEach((place: Place) => {
         const marker = new Marker({
           lat: place.location.latitude,
@@ -61,6 +54,15 @@ function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapPro
       if (scrollZoom !== undefined && !scrollZoom) {
         map.scrollWheelZoom.disable();
       }
+
+      return () => {
+        if (markers.current.length) {
+          for (const marker of markers.current) {
+            map.removeLayer(marker);
+            markers.current = [];
+          }
+        }
+      };
     }
   }, [map, places, currentPlace, scrollZoom]);
 
