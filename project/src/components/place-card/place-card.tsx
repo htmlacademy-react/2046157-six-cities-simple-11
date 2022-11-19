@@ -7,23 +7,31 @@ import { Place } from '../../types/data';
 
 type PlaceCardProps = {
   place: Place;
-  setCurrentPlace: (place: Place | null) => void;
+  parentClassName: string;
+  setCurrentPlace?: (place: Place | null) => void;
 }
 
-function PlaceCard({ place, setCurrentPlace }: PlaceCardProps): JSX.Element {
-
-  function handleMouseEnter() {
-    setCurrentPlace(place);
+function PlaceCard({ place, parentClassName, setCurrentPlace }: PlaceCardProps): JSX.Element {
+  type EventHandlerType = {
+    [key: string]: () => void;
   }
 
-  function handleMouseLeave() {
-    setCurrentPlace(null);
+  const eventHandlers: EventHandlerType = {};
+
+  if (setCurrentPlace) {
+    eventHandlers.onMouseEnter = function () {
+      setCurrentPlace(place);
+    };
+
+    eventHandlers.onMouseLeave = function () {
+      setCurrentPlace(null);
+    };
   }
 
   return (
-    <article onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cities__card place-card">
+    <article {...eventHandlers} className={`${parentClassName}__card place-card`}>
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${parentClassName}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Place}/${place.id}`}>
           <img className="place-card__image" src={place.previewImage} width="260" height="200" alt="Place" />
         </Link>

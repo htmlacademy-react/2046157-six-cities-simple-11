@@ -3,18 +3,26 @@ type PlaceGalleryProps = {
 }
 
 function PlaceGallery({ images }: PlaceGalleryProps): JSX.Element {
-  let id = 1;
-  const cuttedImages = images.slice(0, 6);
+  const IMAGES_SHOW_COUNT = 6;
+  const imagesToShow = images.slice(0, IMAGES_SHOW_COUNT);
 
   return (
-    <div className="property__gallery">
-      {
-        cuttedImages.map((image): JSX.Element => (
-          <div className="property__image-wrapper" key={id++}>
-            <img className="property__image" src={image} alt="studio" />
-          </div>
-        ))
-      }
+    <div className="property__gallery-container container">
+      <div className="property__gallery">
+        {
+          imagesToShow.map((image): JSX.Element => {
+            const regex = /(?:\d+)(?!.*\d)/;
+            const imageId = image.match(regex) as string[];
+            const key = imageId[0];
+
+            return (
+              <div className="property__image-wrapper" key={key}>
+                <img className="property__image" src={image} alt="studio" />
+              </div>
+            );
+          })
+        }
+      </div>
     </div>
   );
 }

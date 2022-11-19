@@ -6,13 +6,13 @@ import Map from '../map/map';
 
 import { City, Place } from '../../types/data';
 
-type PlacesContentProps = {
+type CityPlacesProps = {
   places: Place[];
   city: City;
   placesCount: number;
 }
 
-function PlacesContent(props: PlacesContentProps): JSX.Element {
+function CityPlaces(props: CityPlacesProps): JSX.Element {
   const [currentPlace, setCurrentPlace] = useState<Place | null>(null);
 
   return (
@@ -22,11 +22,19 @@ function PlacesContent(props: PlacesContentProps): JSX.Element {
           ? <PlacesList placesCount={props.placesCount} places={props.places} setCurrentPlace={setCurrentPlace} />
           : <PlacesListEmpty />}
         <div className="cities__right-section">
-          {props.places.length && <Map places={props.places} city={props.city} currentPlace={currentPlace} />}
+          {
+            props.places.length &&
+            <Map
+              places={props.places}
+              city={props.city}
+              currentPlace={currentPlace}
+              parentClassName={'cities'}
+            />
+          }
         </div>
       </div>
     </div>
   );
 }
 
-export default PlacesContent;
+export default CityPlaces;

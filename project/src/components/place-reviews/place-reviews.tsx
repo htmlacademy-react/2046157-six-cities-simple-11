@@ -1,20 +1,18 @@
-import PlaceReviewComment from '../place-review-comment/place-review-comment';
 import PlaceReviewsForm from '../place-reviews-form/place-reviews-form';
+import PlaceReviewsList from '../place-reviews-list/place-reviews-list';
 
-import { User, Place } from '../../types/data';
+import { User, ReviewComment } from '../../types/data';
 
 type PlaceReviewsProps = {
   user: User;
-  rating: Place['rating'];
+  reviewComments: ReviewComment[];
 }
 
-function PlaceReviews({ user, rating }: PlaceReviewsProps): JSX.Element {
+function PlaceReviews({ user, reviewComments }: PlaceReviewsProps): JSX.Element {
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-      <ul className="reviews__list">
-        <PlaceReviewComment rating={rating} />
-      </ul>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewComments.length}</span></h2>
+      <PlaceReviewsList reviewComments={reviewComments} />
       {user.id && <PlaceReviewsForm />}
     </section>
   );
