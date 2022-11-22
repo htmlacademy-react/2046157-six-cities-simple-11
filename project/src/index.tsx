@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+
+import { store } from './store';
 import App from './components/app/app';
 
-import { placesData, placesCountData } from './mocks/places';
 import { userData } from './mocks/user';
-import { city } from './mocks/city';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -12,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App user={userData} placesCount={placesCountData} places={placesData} city={city} />
+    <Provider store={store}>
+      <App user={userData} />
+    </Provider>
   </React.StrictMode>,
 );

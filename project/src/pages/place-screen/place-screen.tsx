@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks/store';
 
 import Header from '../../components/header/header';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
@@ -13,17 +14,16 @@ import PlaceFeatures from '../../components/place-features/place-features';
 import PlaceMap from '../../components/place-map/place-map';
 
 import { placesNearby } from '../../mocks/places-nearby';
-import { city } from '../../mocks/city';
 import { reviewComment } from '../../mocks/review-comments';
 
-import { User, Place } from '../../types/data';
+import { User } from '../../types/data';
 
 type PlaceScreenProps = {
   user: User;
-  places: Place[];
 }
 
-function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
+function PlaceScreen({ user }: PlaceScreenProps): JSX.Element {
+  const places = useAppSelector((state) => state.places);
   const id = Number(useParams().id);
   const place = places.find((element) => element.id === id);
 
@@ -63,7 +63,7 @@ function PlaceScreen({ places, user }: PlaceScreenProps): JSX.Element {
           <div className="container">
             <PlaceMap
               places={placesNearby}
-              city={city}
+              city={place.city}
               currentPlace={place}
               parentClassName={'property'}
               scrollZoom={false}

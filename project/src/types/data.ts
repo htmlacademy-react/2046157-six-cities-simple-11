@@ -37,10 +37,12 @@ export type User = {
 }
 
 export type City = {
-  title: string;
-  lat: number;
-  lng: number;
-  zoom: number;
+  name: string;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
 };
 
 export type ReviewComment = {
