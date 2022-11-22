@@ -1,14 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { selectCityAction, getPlacesAction } from '../store/actions';
 
-import { selectCityAction, getCurrentPlacesListAction } from '../store/actions';
-import { placesData } from '../mocks/places';
 import { CITIES } from '../consts';
 import { Place } from '../types/data';
 
 const initialState = {
   city: CITIES[0],
-  places: placesData,
-  currentPlaces: [] as Place[],
+  places: [] as Place[],
 };
 
 const reducer = createReducer(initialState, (builer) => {
@@ -16,8 +14,8 @@ const reducer = createReducer(initialState, (builer) => {
     .addCase(selectCityAction, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(getCurrentPlacesListAction, (state, action) => {
-      state.currentPlaces = action.payload;
+    .addCase(getPlacesAction, (state, action) => {
+      state.places = action.payload;
     });
 });
 

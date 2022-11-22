@@ -23,9 +23,9 @@ type PlaceScreenProps = {
 }
 
 function PlaceScreen({ user }: PlaceScreenProps): JSX.Element {
-  const currentPlaces = useAppSelector((state) => state.currentPlaces);
+  const places = useAppSelector((state) => state.places);
   const id = Number(useParams().id);
-  const place = currentPlaces.find((element) => element.id === id);
+  const place = places.find((element) => element.id === id);
 
   if (!place) {
     return (

@@ -1,10 +1,9 @@
 import { useAppDispatch } from '../../hooks/store';
-
 import { selectCityAction } from '../../store/actions';
+import './cities-tabs.css';
+
 import { CITIES } from '../../consts';
 import { City } from '../../types/data';
-
-import './cities-tabs.css';
 
 type CitiesTabsProps = {
   currentCity: City;
