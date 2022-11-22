@@ -1,20 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 
-import CitiesTabs from '../../components/cities-tabs/cities-tabs';
 import Header from '../../components/header/header';
-import CityPlaces from '../../components/city-places/city-places';
+import CityContent from '../../components/city-content/city-content';
 
-import { Place, User, City } from '../../types/data';
-
+import { User } from '../../types/data';
 
 type MainScreenProps = {
-  places: Place[];
-  placesCount: number;
   user: User;
-  city: City;
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
+
   return (
     <div className='page page--gray page--main'>
       <Helmet>
@@ -22,11 +18,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <meta name="description" content="Find and rent property in European cities" />
       </Helmet>
       <Header user={props.user} />
-      <main className={`page__main page__main--index ${props.places.length ? '' : 'page__main--index-empty'}`}>
-        <h1 className="visually-hidden">Cities</h1>
-        <CitiesTabs />
-        <CityPlaces places={props.places} city={props.city} placesCount={props.placesCount} />
-      </main>
+      <CityContent />
     </div>
   );
 }

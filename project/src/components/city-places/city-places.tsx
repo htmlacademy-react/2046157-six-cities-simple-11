@@ -8,25 +8,24 @@ import { City, Place } from '../../types/data';
 
 type CityPlacesProps = {
   places: Place[];
-  city: City;
-  placesCount: number;
+  currentCity: City;
 }
 
-function CityPlaces(props: CityPlacesProps): JSX.Element {
+function CityPlaces({ places, currentCity }: CityPlacesProps): JSX.Element {
   const [currentPlace, setCurrentPlace] = useState<Place | null>(null);
 
   return (
     <div className="cities">
-      <div className={`cities__places-container ${props.places.length ? '' : 'cities__places-container--empty'} container`}>
-        {props.places.length
-          ? <PlacesList placesCount={props.placesCount} places={props.places} setCurrentPlace={setCurrentPlace} />
+      <div className={`cities__places-container ${places.length ? '' : 'cities__places-container--empty'} container`}>
+        {places.length
+          ? <PlacesList places={places} setCurrentPlace={setCurrentPlace} currentCity={currentCity} />
           : <PlacesListEmpty />}
         <div className="cities__right-section">
           {
-            props.places.length &&
+            places.length &&
             <Map
-              places={props.places}
-              city={props.city}
+              places={places}
+              city={currentCity}
               currentPlace={currentPlace}
               parentClassName={'cities'}
             />

@@ -9,13 +9,10 @@ import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 import { AppRoute } from '../../consts';
-import { Place, User, City } from '../../types/data';
+import { User } from '../../types/data';
 
 type AppProps = {
-  places: Place[];
-  placesCount: number;
   user: User;
-  city: City;
 }
 
 function App(props: AppProps): JSX.Element {
@@ -24,14 +21,14 @@ function App(props: AppProps): JSX.Element {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} element={<MainScreen placesCount={props.placesCount} places={props.places} user={props.user} city={props.city} />} />
+          <Route path={AppRoute.Root} element={<MainScreen user={props.user} />} />
           <Route path={AppRoute.Login} element={
             <PrivateRoute user={props.user}>
               <LoginScreen user={props.user} />
             </PrivateRoute>
           }
           />
-          <Route path={`${AppRoute.Place}/:id`} element={<PlaceScreen places={props.places} user={props.user} />} />
+          <Route path={`${AppRoute.Place}/:id`} element={<PlaceScreen user={props.user} />} />
           <Route path='*' element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
