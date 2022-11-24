@@ -1,4 +1,4 @@
-function PlacesListEmpty(): JSX.Element {
+function PlacesContentEmpty(): JSX.Element {
   return (
     <section className="cities__no-places">
       <div className="cities__status-wrapper tabs__content">
@@ -9,4 +9,4 @@ function PlacesListEmpty(): JSX.Element {
   );
 }
 
-export default PlacesListEmpty;
+export default PlacesContentEmpty;

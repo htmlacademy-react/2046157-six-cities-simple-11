@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import PlacesListEmpty from '../places-list-empty/places-list-empty';
-import PlacesList from '../places-list/places-list';
+import PlacesContentEmpty from '../places-content-empty/places-content-empty';
+import PlacesContent from '../places-content/places-content';
 import Map from '../map/map';
 
 import { City, Place } from '../../types/data';
@@ -18,8 +18,8 @@ function CityPlaces({ places, currentCity }: CityPlacesProps): JSX.Element {
     <div className="cities">
       <div className={`cities__places-container ${places.length ? '' : 'cities__places-container--empty'} container`}>
         {places.length
-          ? <PlacesList places={places} setCurrentPlace={setCurrentPlace} currentCity={currentCity} />
-          : <PlacesListEmpty />}
+          ? <PlacesContent places={places} setCurrentPlace={setCurrentPlace} currentCity={currentCity} />
+          : <PlacesContentEmpty />}
         <div className="cities__right-section">
           {
             places.length &&
