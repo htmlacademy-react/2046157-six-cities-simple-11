@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Layer, Marker } from 'leaflet';
+import { useAppSelector } from '../../hooks/store';
 import 'leaflet/dist/leaflet.css';
-
 import useMap from '../../hooks/useMap';
 
 import { City, Place } from '../../types/data';
@@ -9,10 +9,10 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../consts';
 
 type MapProps = {
   places: Place[];
-  currentPlace: Place | null;
   city: City;
   parentClassName: string;
   scrollZoom?: boolean;
+  currentPlace?: Place;
 }
 
 const defaultCustomIcon = new Icon({
@@ -27,10 +27,12 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapProps): JSX.Element {
+function Map({ places, city, parentClassName, currentPlace, scrollZoom }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markers = useRef<Layer[]>([]);
+  const currentPlaceFromState = useAppSelector((state) => state.currentPlace);
+  const targetPlace = currentPlace ? currentPlace : currentPlaceFromState;
 
   useEffect(() => {
     if (map) {
@@ -42,7 +44,7 @@ function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapPro
 
         marker
           .setIcon(
-            currentPlace !== null && place.title === currentPlace.title
+            targetPlace !== null && place.id === targetPlace.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -64,7 +66,7 @@ function Map({ places, currentPlace, city, parentClassName, scrollZoom }: MapPro
         }
       };
     }
-  }, [map, places, currentPlace, scrollZoom]);
+  }, [map, places, scrollZoom, targetPlace]);
 
   return (
     <section className={`${parentClassName}__map map`} ref={mapRef}></section>

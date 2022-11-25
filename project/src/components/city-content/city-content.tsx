@@ -6,7 +6,6 @@ import CitiesTabs from '../cities-tabs/cities-tabs';
 function CityContent(): JSX.Element {
   const currentCity = useAppSelector((state) => state.city);
   const places = useAppSelector((state) => state.places);
-
   const cityPlaces = places.filter((place) => place.city.name === currentCity.name);
 
   return (

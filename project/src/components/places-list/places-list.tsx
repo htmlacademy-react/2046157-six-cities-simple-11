@@ -6,10 +6,9 @@ import { Place } from '../../types/data';
 
 type PlacesListProps = {
   places: Place[];
-  setCurrentPlace: (place: Place | null) => void;
 }
 
-function PlacesList({ places, setCurrentPlace }: PlacesListProps): JSX.Element {
+function PlacesList({ places }: PlacesListProps): JSX.Element {
   const sortType = useAppSelector((state) => state.placesSortType);
 
   function getSortedPlaces(type: string, arr: Place[]): Place[] {
@@ -33,7 +32,7 @@ function PlacesList({ places, setCurrentPlace }: PlacesListProps): JSX.Element {
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {getSortedPlaces(sortType, places).map((place): JSX.Element => <PlaceCard place={place} key={place.id} setCurrentPlace={setCurrentPlace} parentClassName={'cities'} />)}
+      {getSortedPlaces(sortType, places).map((place): JSX.Element => <PlaceCard place={place} key={place.id} parentClassName={'cities'} haveListeners />)}
     </div>
   );
 }

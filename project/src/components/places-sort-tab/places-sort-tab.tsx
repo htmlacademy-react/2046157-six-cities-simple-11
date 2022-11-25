@@ -13,15 +13,23 @@ function PlacesSortTab(): JSX.Element {
     setIsOpen(!isOpen);
   }
 
+  function handleMenuItemClick(type: string) {
+    dispatch(setSortType(type));
+    handleMenuClick();
+  }
+
   const handleDocumentClick = (evt: MouseEvent) => {
     const target = evt.target as HTMLElement;
+
     if (isOpen && (!target.closest('.places__options') && !target.closest('.places__sorting-type'))) {
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleDocumentClick);
+    if (isOpen) {
+      document.addEventListener('click', handleDocumentClick);
+    }
 
     return () => document.removeEventListener('click', handleDocumentClick);
   });
@@ -38,7 +46,7 @@ function PlacesSortTab(): JSX.Element {
       <ul className={`places__options places__options--custom ${isOpen ? 'places__options--opened' : ''}`}>
         {sortTypes.map((type) => (
           <li
-            onClick={() => dispatch(setSortType(type))}
+            onClick={() => handleMenuItemClick(type)}
             key={type}
             className={`places__option ${type === sortType ? 'places__option--active' : ''}`}
             style={{ pointerEvents: `${type === sortType ? 'none' : 'auto'}` }}

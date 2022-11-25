@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { selectCityAction, getPlacesAction, setSortType } from '../store/actions';
+import { selectCityAction, getPlacesAction, setSortType, setCurrentPlace } from '../store/actions';
 
 import { CITIES, sortTypes } from '../consts';
 import { Place } from '../types/data';
@@ -7,7 +7,8 @@ import { Place } from '../types/data';
 const initialState = {
   city: CITIES[0],
   places: [] as Place[],
-  placesSortType: sortTypes[0]
+  placesSortType: sortTypes[0],
+  currentPlace: null as Place | null
 };
 
 const reducer = createReducer(initialState, (builer) => {
@@ -20,6 +21,9 @@ const reducer = createReducer(initialState, (builer) => {
     })
     .addCase(setSortType, (state, action) => {
       state.placesSortType = action.payload;
+    })
+    .addCase(setCurrentPlace, (state, action) => {
+      state.currentPlace = action.payload;
     });
 });
 
