@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/store';
+import { setCurrentPlace } from '../../store/actions';
 
 import StarRating from '../star-rating/star-rating';
 
@@ -8,25 +10,32 @@ import { Place } from '../../types/data';
 type PlaceCardProps = {
   place: Place;
   parentClassName: string;
-  setCurrentPlace?: (place: Place | null) => void;
+  haveListeners: boolean;
 }
 
-function PlaceCard({ place, parentClassName, setCurrentPlace }: PlaceCardProps): JSX.Element {
+function PlaceCard({ place, parentClassName, haveListeners }: PlaceCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   type EventHandlerType = {
     [key: string]: () => void;
   }
 
   const eventHandlers: EventHandlerType = {};
 
-  if (setCurrentPlace) {
+  if (haveListeners) {
     eventHandlers.onMouseEnter = function () {
-      setCurrentPlace(place);
+      dispatch(setCurrentPlace(place));
     };
 
     eventHandlers.onMouseLeave = function () {
-      setCurrentPlace(null);
+      dispatch(setCurrentPlace(null));
+    };
+
+    eventHandlers.onClick = function () {
+      dispatch(setCurrentPlace(null));
     };
   }
+
 
   return (
     <article {...eventHandlers} className={`${parentClassName}__card place-card`}>

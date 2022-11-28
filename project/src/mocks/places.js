@@ -30,7 +30,7 @@ export const placesData = [
     ],
     title: 'Loft Studio in the Central Area',
     isPremium: false,
-    rating: 3.5,
+    rating: 4.8,
     type: 'hotel',
     bedrooms: 3,
     maxAdults: 4,
@@ -499,6 +499,178 @@ export const placesData = [
       zoom: 16
     },
     id: 36
+  },
+  {
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    previewImage: 'https://11.react.pages.academy/static/hotel/5.jpg',
+    images: [
+      'https://11.react.pages.academy/static/hotel/9.jpg',
+      'https://11.react.pages.academy/static/hotel/11.jpg',
+      'https://11.react.pages.academy/static/hotel/6.jpg',
+      'https://11.react.pages.academy/static/hotel/20.jpg',
+      'https://11.react.pages.academy/static/hotel/3.jpg',
+      'https://11.react.pages.academy/static/hotel/13.jpg',
+      'https://11.react.pages.academy/static/hotel/4.jpg',
+      'https://11.react.pages.academy/static/hotel/14.jpg',
+      'https://11.react.pages.academy/static/hotel/8.jpg',
+      'https://11.react.pages.academy/static/hotel/19.jpg',
+      'https://11.react.pages.academy/static/hotel/1.jpg',
+      'https://11.react.pages.academy/static/hotel/7.jpg',
+      'https://11.react.pages.academy/static/hotel/12.jpg',
+      'https://11.react.pages.academy/static/hotel/15.jpg'
+    ],
+    title: 'Amazing and Extremely Central Flat',
+    isPremium: false,
+    rating: 2.8,
+    type: 'room',
+    bedrooms: 1,
+    maxAdults: 2,
+    price: 278,
+    goods: [
+      'Washer',
+      'Laptop friendly workspace',
+      'Air conditioning',
+      'Breakfast',
+      'Towels',
+      'Baby seat',
+      'Fridge'
+    ],
+    host: {
+      id: 25,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg'
+    },
+    description: 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
+    location: {
+      latitude: 52.367540000000005,
+      longitude: 4.883976,
+      zoom: 16
+    },
+    id: 72
+  },
+  {
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 13
+      }
+    },
+    previewImage: 'https://11.react.pages.academy/static/hotel/9.jpg',
+    images: [
+      'https://11.react.pages.academy/static/hotel/11.jpg',
+      'https://11.react.pages.academy/static/hotel/5.jpg',
+      'https://11.react.pages.academy/static/hotel/13.jpg',
+      'https://11.react.pages.academy/static/hotel/15.jpg',
+      'https://11.react.pages.academy/static/hotel/2.jpg',
+      'https://11.react.pages.academy/static/hotel/16.jpg',
+      'https://11.react.pages.academy/static/hotel/14.jpg',
+      'https://11.react.pages.academy/static/hotel/7.jpg',
+      'https://11.react.pages.academy/static/hotel/20.jpg',
+      'https://11.react.pages.academy/static/hotel/12.jpg',
+      'https://11.react.pages.academy/static/hotel/4.jpg',
+      'https://11.react.pages.academy/static/hotel/8.jpg',
+      'https://11.react.pages.academy/static/hotel/1.jpg',
+      'https://11.react.pages.academy/static/hotel/18.jpg'
+    ],
+    title: 'Waterfront with extraordinary view',
+    isPremium: false,
+    rating: 4.8,
+    type: 'room',
+    bedrooms: 1,
+    maxAdults: 1,
+    price: 172,
+    goods: [
+      'Breakfast',
+      'Laptop friendly workspace',
+      'Dishwasher',
+      'Fridge',
+      'Air conditioning',
+      'Coffee machine',
+      'Baby seat',
+      'Towels',
+      'Washer'
+    ],
+    host: {
+      id: 25,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg'
+    },
+    description: 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
+    location: {
+      latitude: 51.205402,
+      longitude: 6.7613140000000005,
+      zoom: 16
+    },
+    id: 74
+  },
+  {
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    previewImage: 'https://11.react.pages.academy/static/hotel/17.jpg',
+    images: [
+      'https://11.react.pages.academy/static/hotel/3.jpg',
+      'https://11.react.pages.academy/static/hotel/2.jpg',
+      'https://11.react.pages.academy/static/hotel/10.jpg',
+      'https://11.react.pages.academy/static/hotel/19.jpg',
+      'https://11.react.pages.academy/static/hotel/9.jpg',
+      'https://11.react.pages.academy/static/hotel/13.jpg',
+      'https://11.react.pages.academy/static/hotel/1.jpg',
+      'https://11.react.pages.academy/static/hotel/12.jpg',
+      'https://11.react.pages.academy/static/hotel/7.jpg',
+      'https://11.react.pages.academy/static/hotel/18.jpg',
+      'https://11.react.pages.academy/static/hotel/17.jpg',
+      'https://11.react.pages.academy/static/hotel/8.jpg',
+      'https://11.react.pages.academy/static/hotel/15.jpg',
+      'https://11.react.pages.academy/static/hotel/16.jpg'
+    ],
+    title: 'Waterfront with extraordinary view',
+    isPremium: false,
+    rating: 2.2,
+    type: 'room',
+    bedrooms: 1,
+    maxAdults: 3,
+    price: 142,
+    goods: [
+      'Washer',
+      'Laptop friendly workspace',
+      'Air conditioning',
+      'Dishwasher',
+      'Towels',
+      'Breakfast',
+      'Coffee machine',
+      'Baby seat',
+      'Fridge'
+    ],
+    host: {
+      id: 25,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg'
+    },
+    description: 'This is a place for dreamers to reset, reflect, and create. Designed with a "slow" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
+    location: {
+      latitude: 52.37454,
+      longitude: 4.881976,
+      zoom: 16
+    },
+    id: 91
   }
 ];
 

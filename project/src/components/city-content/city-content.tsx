@@ -5,7 +5,8 @@ import CitiesTabs from '../cities-tabs/cities-tabs';
 
 function CityContent(): JSX.Element {
   const currentCity = useAppSelector((state) => state.city);
-  const cityPlaces = useAppSelector((state) => state.places.filter((place) => place.city.name === currentCity.name));
+  const places = useAppSelector((state) => state.places);
+  const cityPlaces = places.filter((place) => place.city.name === currentCity.name);
 
   return (
     <main className={`page__main page__main--index ${cityPlaces.length ? '' : 'page__main--index-empty'}`}>
