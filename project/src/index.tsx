@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './store';
 import App from './components/app/app';
+import ErrorMessage from './components/error-message/error-message';
 
 import { userData } from './mocks/user';
 
@@ -12,9 +13,8 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App user={userData} />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ErrorMessage />
+    <App user={userData} />
+  </Provider>
 );

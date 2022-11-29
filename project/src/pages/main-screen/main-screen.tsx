@@ -1,4 +1,6 @@
 import { Helmet } from 'react-helmet-async';
+import { useAppDispatch } from '../../hooks/store';
+import { fetchPlacesAction } from '../../store/api-actions';
 
 import Header from '../../components/header/header';
 import CityContent from '../../components/city-content/city-content';
@@ -10,6 +12,10 @@ type MainScreenProps = {
 }
 
 function MainScreen(props: MainScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  dispatch(fetchPlacesAction());
+
   return (
     <div className='page page--gray page--main'>
       <Helmet>

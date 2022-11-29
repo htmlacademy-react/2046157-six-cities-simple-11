@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../../hooks/store';
 import { useEffect, useState } from 'react';
-import { setSortType } from '../../store/actions';
+import { setSortTypeAction } from '../../store/actions';
 
 import { sortTypes } from '../../consts';
 
@@ -14,7 +14,7 @@ function PlacesSortTab(): JSX.Element {
   }
 
   function handleMenuItemClick(type: string) {
-    dispatch(setSortType(type));
+    dispatch(setSortTypeAction(type));
     handleMenuClick();
   }
 
