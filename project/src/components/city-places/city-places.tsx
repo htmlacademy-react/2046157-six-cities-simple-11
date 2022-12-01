@@ -1,3 +1,5 @@
+import { useAppSelector } from '../../hooks/store';
+
 import PlacesContentEmpty from '../places-content-empty/places-content-empty';
 import PlacesContent from '../places-content/places-content';
 import Map from '../map/map';
@@ -10,15 +12,17 @@ type CityPlacesProps = {
 }
 
 function CityPlaces({ places, currentCity }: CityPlacesProps): JSX.Element {
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+
   return (
     <div className="cities">
-      <div className={`cities__places-container ${places.length ? '' : 'cities__places-container--empty'} container`}>
-        {places.length
-          ? <PlacesContent places={places} currentCity={currentCity} />
-          : <PlacesContentEmpty />}
+      <div className={`cities__places-container ${isDataLoaded && !places.length ? 'cities__places-container--empty' : ''} container`}>
+        {isDataLoaded && !places.length
+          ? <PlacesContentEmpty />
+          : <PlacesContent places={places} currentCity={currentCity} />}
         <div className="cities__right-section">
           {
-            places.length &&
+            (places.length !== 0) &&
             <Map
               places={places}
               city={currentCity}

@@ -1,7 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppDispatch } from '../../hooks/store';
-import { getPlacesAction } from '../../store/actions';
 
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -12,17 +10,12 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 import { AppRoute } from '../../consts';
 import { User } from '../../types/data';
-import { placesData } from '../../mocks/places';
 
 type AppProps = {
   user: User;
 }
 
 function App(props: AppProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  dispatch(getPlacesAction(placesData));
-
   return (
     <HelmetProvider>
       <BrowserRouter>
