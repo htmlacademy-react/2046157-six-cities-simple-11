@@ -1,12 +1,13 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { store } from './store';
-import App from './components/app/app';
-import ErrorMessage from './components/error-message/error-message';
+import { checkAuthAction } from './store/api-actions';
 
-import { userData } from './mocks/user';
+import App from './components/app/app';
+
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,7 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider store={store}>
-    <ErrorMessage />
-    <App user={userData} />
+    <ToastContainer />
+    <App />
   </Provider>
 );

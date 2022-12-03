@@ -1,5 +1,8 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import { processErrorHandle } from './process-error-handle';
+import axios, { AxiosInstance, AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
+import { toast } from 'react-toastify';
+import { store } from '../store';
+import { setDataLoadingStatusAction } from '../store/actions';
+import { getToken } from './token';
 
 import { StatusCodeMapping } from '../consts';
 
@@ -14,14 +17,29 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
+  api.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      const token = getToken();
+
+      if (token && config.headers) {
+        config.headers['x-token'] = token;
+      }
+
+      return config;
+    },
+  );
+
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<{ error: string }>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        processErrorHandle(error.response.data.error);
+        toast.warn(error.response.data.error);
+        store.dispatch(setDataLoadingStatusAction(true));
       } else if (error && error.code === 'ECONNABORTED') {
-        processErrorHandle(error.message);
+        toast.warn(error.message);
+        store.dispatch(setDataLoadingStatusAction(true));
       }
+
       throw error;
     }
   );

@@ -6,6 +6,14 @@ export enum AppRoute {
 
 export enum APIRoute {
   Hotels = '/hotels',
+  Login = '/login',
+  Logout = '/logout'
+}
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
 }
 
 export const URL_MARKER_DEFAULT =
@@ -69,9 +77,9 @@ export enum StatusCodeMapping {
   INTERNAL_SERVER_ERROR = 500,
   SERVICE_UNAVAILABLE = 503,
   GATEWAY_TIMEOUT = 504,
+  BAD_REQUEST = 400,
 }
 
 export const TIMEOUT_SHOW_ERROR = 4000;
-
 
 export const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];

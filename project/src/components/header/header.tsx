@@ -4,13 +4,8 @@ import HeaderNav from '../header-nav/header-nav';
 import Logo from '../logo/logo';
 
 import { AppRoute } from '../../consts';
-import { User } from '../../types/data';
 
-type HeaderProps = {
-  user: User;
-}
-
-function Header({ user }: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
   const isNotLoginPage = useLocation().pathname !== AppRoute.Login;
 
   return (
@@ -20,7 +15,7 @@ function Header({ user }: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo />
           </div>
-          {isNotLoginPage && <HeaderNav user={user} />}
+          {isNotLoginPage && <HeaderNav />}
         </div>
       </div>
     </header>

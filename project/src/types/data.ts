@@ -32,10 +32,6 @@ export type Place = {
   };
 }
 
-export type User = {
-  id?: number;
-}
-
 export type City = {
   name: string;
   location: {
@@ -56,4 +52,18 @@ export type ReviewComment = {
     isPro: boolean;
     name: string;
   };
+};
+
+export type AuthData = {
+  email: string;
+  password: string;
+};
+
+export type UserData = {
+  avatarUrl: string;
+  email: string;
+  id: number;
+  isPro: boolean;
+  name: string;
+  token: string;
 };

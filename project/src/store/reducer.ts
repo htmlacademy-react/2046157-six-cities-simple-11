@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { selectCityAction, getPlacesAction, setSortTypeAction, setCurrentPlaceAction, setDataLoadingStatusAction, setError } from '../store/actions';
+import { selectCityAction, getPlacesAction, setSortTypeAction, setCurrentPlaceAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction } from '../store/actions';
 
-import { CITIES, sortTypes } from '../consts';
-import { Place, City } from '../types/data';
+import { CITIES, sortTypes, AuthorizationStatus } from '../consts';
+import { Place, City, UserData } from '../types/data';
 
 type InitalState = {
   city: City;
@@ -10,7 +10,8 @@ type InitalState = {
   placesSortType: string;
   currentPlace: null | Place;
   isDataLoaded: boolean;
-  error: string | null;
+  authorizationStatus: string;
+  user: UserData | null;
 }
 
 const initialState: InitalState = {
@@ -19,7 +20,8 @@ const initialState: InitalState = {
   placesSortType: sortTypes[0],
   currentPlace: null,
   isDataLoaded: false,
-  error: null,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  user: null,
 };
 
 const reducer = createReducer(initialState, (builer) => {
@@ -39,8 +41,11 @@ const reducer = createReducer(initialState, (builer) => {
     .addCase(setDataLoadingStatusAction, (state, action) => {
       state.isDataLoaded = action.payload;
     })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
+    .addCase(requireAuthorizationAction, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(getUserAction, (state, action) => {
+      state.user = action.payload;
     });
 });
 

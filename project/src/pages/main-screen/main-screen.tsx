@@ -1,20 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch } from '../../hooks/store';
 import { fetchPlacesAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 import Header from '../../components/header/header';
 import CityContent from '../../components/city-content/city-content';
 
-import { User } from '../../types/data';
-
-type MainScreenProps = {
-  user: User;
-}
-
-function MainScreen(props: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  dispatch(fetchPlacesAction());
+  useEffect(() => {
+    dispatch(fetchPlacesAction());
+  }, [dispatch]);
 
   return (
     <div className='page page--gray page--main'>
@@ -22,7 +19,7 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <title>six cities simple</title>
         <meta name="description" content="Find and rent property in European cities" />
       </Helmet>
-      <Header user={props.user} />
+      <Header />
       <CityContent />
     </div>
   );
