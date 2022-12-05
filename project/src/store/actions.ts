@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { City, Place } from '../types/data';
+import { City, Place, UserData } from '../types/data';
+import { AuthorizationStatus } from '../consts';
 
 export const selectCityAction = createAction<City>('places/selectCity');
 
@@ -12,4 +13,6 @@ export const setCurrentPlaceAction = createAction<Place | null>('places/setCurre
 
 export const setDataLoadingStatusAction = createAction<boolean>('places/setDataLoadingStatus');
 
-export const setError = createAction<string | null>('app/setError');
+export const requireAuthorizationAction = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const getUserAction = createAction<UserData | null>('user/getUser');

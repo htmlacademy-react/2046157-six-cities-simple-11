@@ -16,13 +16,7 @@ import PlaceMap from '../../components/place-map/place-map';
 import { placesNearby } from '../../mocks/places-nearby';
 import { reviewComment } from '../../mocks/review-comments';
 
-import { User } from '../../types/data';
-
-type PlaceScreenProps = {
-  user: User;
-}
-
-function PlaceScreen({ user }: PlaceScreenProps): JSX.Element {
+function PlaceScreen(): JSX.Element {
   const places = useAppSelector((state) => state.places);
   const id = Number(useParams().id);
   const place = places.find((element) => element.id === id);
@@ -39,7 +33,7 @@ function PlaceScreen({ user }: PlaceScreenProps): JSX.Element {
         <title>{place.title}</title>
         <meta name="descripton" content={place.description}></meta>
       </Helmet>
-      <Header user={user} />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <PlaceGallery images={place.images} />
@@ -57,7 +51,7 @@ function PlaceScreen({ user }: PlaceScreenProps): JSX.Element {
               </div>
               <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews user={user} reviewComments={reviewComment} />
+              <PlaceReviews reviewComments={reviewComment} />
             </div>
           </div>
           <div className="container">
