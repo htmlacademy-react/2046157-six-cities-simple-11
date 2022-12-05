@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/store';
-import { fetchNearbyPlacesAction, fetchPlaceAction } from '../../store/api-actions';
+import { fetchNearbyPlacesAction, fetchPlaceAction, fetchReviewCommentsAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/store';
 import { useEffect } from 'react';
 
@@ -16,20 +16,23 @@ import PlaceFeatures from '../../components/place-features/place-features';
 import PlaceMap from '../../components/place-map/place-map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-import { reviewComment } from '../../mocks/review-comments';
-
 function PlaceScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
 
   const place = useAppSelector((state) => state.currentPlace);
   const placesNearby = useAppSelector((state) => state.placesNearby);
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const reviewComments = useAppSelector((state) => state.reviewComments);
+  const user = useAppSelector((state) => state.user);
 
   const id = Number(useParams().id);
 
   useEffect(() => {
-    dispatch(fetchPlaceAction(id));
-    dispatch(fetchNearbyPlacesAction(id));
+    if (id) {
+      dispatch(fetchPlaceAction(id));
+      dispatch(fetchNearbyPlacesAction(id));
+      dispatch(fetchReviewCommentsAction(id));
+    }
   }, [dispatch, id]);
 
 
@@ -64,7 +67,7 @@ function PlaceScreen(): JSX.Element | null {
               </div>
               <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews reviewComments={reviewComment} />
+              <PlaceReviews user={user} reviewComments={reviewComments} />
             </div>
           </div>
           <div className="container">

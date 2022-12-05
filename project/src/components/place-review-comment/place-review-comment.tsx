@@ -7,7 +7,6 @@ type PlaceReviewCommentProps = {
 }
 
 function PlaceReviewComment({ reviewComment }: PlaceReviewCommentProps): JSX.Element {
-  //с атрибутом dateTime разберусь когда буду знать, в каком формате будет приходить дата с бека.
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -19,7 +18,9 @@ function PlaceReviewComment({ reviewComment }: PlaceReviewCommentProps): JSX.Ele
       <div className="reviews__info">
         <StarRating rating={reviewComment.rating} blockName={'reviews'} showRatingValue={false} />
         <p className="reviews__text">{reviewComment.comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">{reviewComment.date}</time>
+        <time className="reviews__time" dateTime={reviewComment.date.replace(/T(\S)*/, '')}>
+          {new Date(reviewComment.date).toLocaleString('en-US', { month: 'long', year: 'numeric' })}
+        </time>
       </div>
     </li>
   );

@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { selectCityAction, getPlacesAction, setSortTypeAction, getCurrentPlaceAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getNearbyPlacesAction } from '../store/actions';
+import { selectCityAction, getPlacesAction, setSortTypeAction, getCurrentPlaceAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getNearbyPlacesAction, getReviewCommentsAction } from '../store/actions';
 
 import { CITIES, sortTypes, AuthorizationStatus } from '../consts';
-import { Place, City, UserData } from '../types/data';
+import { Place, City, UserData, ReviewComment } from '../types/data';
 
 type InitalState = {
   city: City;
@@ -13,6 +13,7 @@ type InitalState = {
   authorizationStatus: string;
   user: UserData | null;
   placesNearby: Place[];
+  reviewComments: ReviewComment[];
 }
 
 const initialState: InitalState = {
@@ -24,6 +25,7 @@ const initialState: InitalState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
   placesNearby: [],
+  reviewComments: [],
 };
 
 const reducer = createReducer(initialState, (builer) => {
@@ -51,6 +53,9 @@ const reducer = createReducer(initialState, (builer) => {
     })
     .addCase(getNearbyPlacesAction, (state, action) => {
       state.placesNearby = action.payload;
+    })
+    .addCase(getReviewCommentsAction, (state, action) => {
+      state.reviewComments = action.payload;
     });
 });
 

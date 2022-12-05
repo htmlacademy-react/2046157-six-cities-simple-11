@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getCurrentPlaceAction, getNearbyPlacesAction } from './actions';
+import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getCurrentPlaceAction, getNearbyPlacesAction, getReviewCommentsAction } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
-import { Place, AuthData, UserData, } from '../types/data';
+import { Place, AuthData, UserData, ReviewComment, } from '../types/data';
 import { APIRoute, AuthorizationStatus } from '../consts';
 
 export const fetchPlacesAction = createAsyncThunk<void, undefined, {
@@ -53,6 +53,19 @@ export const fetchNearbyPlacesAction = createAsyncThunk<void, Place['id'], {
     const { data } = await api.get<Place[]>(`${APIRoute.Hotels}/${id}/nearby`);
 
     dispatch(getNearbyPlacesAction(data));
+  },
+);
+
+export const fetchReviewCommentsAction = createAsyncThunk<void, Place['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReviewComments',
+  async (id, { dispatch, extra: api }) => {
+    const { data } = await api.get<ReviewComment[]>(`${APIRoute.Comments}/${id}`);
+
+    dispatch(getReviewCommentsAction(data));
   },
 );
 
