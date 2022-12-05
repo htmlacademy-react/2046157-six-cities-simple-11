@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/store';
+import { fetchPlaceAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/store';
+import { useEffect } from 'react';
 
 import Header from '../../components/header/header';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PlaceGallery from '../../components/place-gallery/place-gallery';
 import PlaceHost from '../../components/place-host/place-host';
 import PlaceEquipment from '../../components/place-equipment/place-equipment';
@@ -16,18 +18,19 @@ import PlaceMap from '../../components/place-map/place-map';
 import { placesNearby } from '../../mocks/places-nearby';
 import { reviewComment } from '../../mocks/review-comments';
 
-function PlaceScreen(): JSX.Element {
-  const places = useAppSelector((state) => state.places);
-  const id = Number(useParams().id);
-  const place = places.find((element) => element.id === id);
+function PlaceScreen(): JSX.Element | null {
+  const dispatch = useAppDispatch();
+  const place = useAppSelector((state) => state.currentPlace);
 
-  if (!place) {
-    return (
-      <NotFoundScreen />
-    );
-  }
+  const id = Number(useParams().id);
+
+
+  useEffect(() => {
+    dispatch(fetchPlaceAction(id));
+  }, [dispatch, id]);
 
   return (
+    place &&
     <div className="page">
       <Helmet>
         <title>{place.title}</title>

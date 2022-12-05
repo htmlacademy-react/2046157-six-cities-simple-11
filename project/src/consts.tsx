@@ -1,7 +1,8 @@
 export enum AppRoute {
   Login = '/login',
   Place = '/offer',
-  Root = '/'
+  Root = '/',
+  NotFound = '*',
 }
 
 export enum APIRoute {

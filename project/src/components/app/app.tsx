@@ -1,5 +1,7 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 import MainScreen from '../../pages/main-screen/main-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
@@ -13,7 +15,7 @@ import { AppRoute } from '../../consts';
 function App(): JSX.Element {
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop />
         <Routes>
           <Route path={AppRoute.Root} element={<MainScreen />} />
@@ -24,9 +26,9 @@ function App(): JSX.Element {
           }
           />
           <Route path={`${AppRoute.Place}/:id`} element={<PlaceScreen />} />
-          <Route path='*' element={<NotFoundScreen />} />
+          <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
