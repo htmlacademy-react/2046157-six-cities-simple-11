@@ -14,6 +14,7 @@ import PlacesNearby from '../../components/places-nearby/places-nearby';
 import StarRating from '../../components/star-rating/star-rating';
 import PlaceFeatures from '../../components/place-features/place-features';
 import PlaceMap from '../../components/place-map/place-map';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 import { placesNearby } from '../../mocks/places-nearby';
 import { reviewComment } from '../../mocks/review-comments';
@@ -21,13 +22,20 @@ import { reviewComment } from '../../mocks/review-comments';
 function PlaceScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
   const place = useAppSelector((state) => state.currentPlace);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
   const id = Number(useParams().id);
-
 
   useEffect(() => {
     dispatch(fetchPlaceAction(id));
   }, [dispatch, id]);
+
+
+  if (!place && isDataLoaded) {
+    return (
+      <NotFoundScreen />
+    );
+  }
 
   return (
     place &&

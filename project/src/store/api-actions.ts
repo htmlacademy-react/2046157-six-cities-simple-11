@@ -1,11 +1,11 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, setCurrentPlaceAction, redirectToRoute } from './actions';
+import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, setCurrentPlaceAction } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
 import { Place, AuthData, UserData, } from '../types/data';
-import { APIRoute, AppRoute, AuthorizationStatus } from '../consts';
+import { APIRoute, AuthorizationStatus } from '../consts';
 
 export const fetchPlacesAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -31,10 +31,14 @@ export const fetchPlaceAction = createAsyncThunk<void, Place['id'], {
   'data/fetchPlace',
   async (id, { dispatch, extra: api }) => {
     try {
+      dispatch(setDataLoadingStatusAction(false));
+
       const { data } = await api.get<Place>(`${APIRoute.Hotels}/${id}`);
+
       dispatch(setCurrentPlaceAction(data));
+      dispatch(setDataLoadingStatusAction(true));
     } catch {
-      dispatch(redirectToRoute(AppRoute.NotFound));
+      dispatch(setDataLoadingStatusAction(true));
     }
   },
 );
