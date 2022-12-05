@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, setCurrentPlaceAction } from './actions';
+import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getCurrentPlaceAction, getNearbyPlacesAction } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
 import { Place, AuthData, UserData, } from '../types/data';
@@ -35,11 +35,24 @@ export const fetchPlaceAction = createAsyncThunk<void, Place['id'], {
 
       const { data } = await api.get<Place>(`${APIRoute.Hotels}/${id}`);
 
-      dispatch(setCurrentPlaceAction(data));
+      dispatch(getCurrentPlaceAction(data));
       dispatch(setDataLoadingStatusAction(true));
     } catch {
       dispatch(setDataLoadingStatusAction(true));
     }
+  },
+);
+
+export const fetchNearbyPlacesAction = createAsyncThunk<void, Place['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchPlacesNearby',
+  async (id, { dispatch, extra: api }) => {
+    const { data } = await api.get<Place[]>(`${APIRoute.Hotels}/${id}/nearby`);
+
+    dispatch(getNearbyPlacesAction(data));
   },
 );
 

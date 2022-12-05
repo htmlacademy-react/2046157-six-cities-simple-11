@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/store';
-import { setCurrentPlaceAction } from '../../store/actions';
+import { getCurrentPlaceAction } from '../../store/actions';
 
 import StarRating from '../star-rating/star-rating';
 
@@ -24,15 +24,15 @@ function PlaceCard({ place, parentClassName, haveListeners }: PlaceCardProps): J
 
   if (haveListeners) {
     eventHandlers.onMouseEnter = function () {
-      dispatch(setCurrentPlaceAction(place));
+      dispatch(getCurrentPlaceAction(place));
     };
 
     eventHandlers.onMouseLeave = function () {
-      dispatch(setCurrentPlaceAction(null));
+      dispatch(getCurrentPlaceAction(null));
     };
 
     eventHandlers.onClick = function () {
-      dispatch(setCurrentPlaceAction(null));
+      dispatch(getCurrentPlaceAction(null));
     };
   }
 

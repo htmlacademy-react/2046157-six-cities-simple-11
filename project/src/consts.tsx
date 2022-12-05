@@ -79,6 +79,7 @@ export enum StatusCodeMapping {
   SERVICE_UNAVAILABLE = 503,
   GATEWAY_TIMEOUT = 504,
   BAD_REQUEST = 400,
+  NOT_FOUND = 404,
 }
 
 export const TIMEOUT_SHOW_ERROR = 4000;
