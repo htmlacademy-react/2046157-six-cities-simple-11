@@ -15,6 +15,7 @@ import StarRating from '../../components/star-rating/star-rating';
 import PlaceFeatures from '../../components/place-features/place-features';
 import PlaceMap from '../../components/place-map/place-map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import PlaceContent from '../../components/place-content/place-content';
 
 function PlaceScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ function PlaceScreen(): JSX.Element | null {
       </Helmet>
       <Header />
       <main className="page__main page__main--property">
-        <section className="property">
+        <PlaceContent>
           <PlaceGallery images={place.images} />
           <div className="property__container container">
             <div className="property__wrapper">
@@ -78,7 +79,7 @@ function PlaceScreen(): JSX.Element | null {
               scrollZoom={false}
             />
           </div>
-        </section>
+        </PlaceContent>
         <PlacesNearby placesNearby={placesNearby} />
       </main>
     </div>
