@@ -86,3 +86,14 @@ export enum StatusCodeMapping {
 export const TIMEOUT_SHOW_ERROR = 4000;
 
 export const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+
+export const MIN_SYMBOLS_COUNT = 50;
+export const MAX_SYMBOLS_COUNT = 300;
+
+export const RatingGradation = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect'
+} as const;

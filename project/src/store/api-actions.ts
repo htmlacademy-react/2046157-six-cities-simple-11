@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getCurrentPlaceAction, getNearbyPlacesAction, getReviewCommentsAction } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
-import { Place, AuthData, UserData, ReviewComment, } from '../types/data';
+import { Place, AuthData, UserData, ReviewComment, NewReviewComment } from '../types/data';
 import { APIRoute, AuthorizationStatus } from '../consts';
 
 export const fetchPlacesAction = createAsyncThunk<void, undefined, {
@@ -64,6 +64,22 @@ export const fetchReviewCommentsAction = createAsyncThunk<void, Place['id'], {
   'data/fetchReviewComments',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<ReviewComment[]>(`${APIRoute.Comments}/${id}`);
+
+    dispatch(getReviewCommentsAction(data));
+  },
+);
+
+export const fetchAddReviewCommentAction = createAsyncThunk<void, {
+  placeId: Place['id'];
+  newComment: NewReviewComment;
+}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchAddReviewComment',
+  async ({ placeId: id, newComment: { comment, rating } }, { dispatch, extra: api }) => {
+    const { data } = await api.post<ReviewComment[]>(`${APIRoute.Comments}/${id}`, { comment, rating });
 
     dispatch(getReviewCommentsAction(data));
   },

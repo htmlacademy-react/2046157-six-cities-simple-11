@@ -23,7 +23,6 @@ function PlaceScreen(): JSX.Element | null {
   const placesNearby = useAppSelector((state) => state.placesNearby);
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
   const reviewComments = useAppSelector((state) => state.reviewComments);
-  const user = useAppSelector((state) => state.user);
 
   const id = Number(useParams().id);
 
@@ -67,7 +66,7 @@ function PlaceScreen(): JSX.Element | null {
               </div>
               <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews user={user} reviewComments={reviewComments} />
+              <PlaceReviews reviewComments={reviewComments} />
             </div>
           </div>
           <div className="container">

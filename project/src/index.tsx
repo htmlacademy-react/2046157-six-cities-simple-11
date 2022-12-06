@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -14,8 +15,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <Provider store={store}>
-    <ToastContainer />
-    <App />
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <ToastContainer />
+      <App />
+    </Provider>
+  </React.StrictMode>
 );
