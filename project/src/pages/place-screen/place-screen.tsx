@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/store';
+import { fetchNearbyPlacesAction, fetchPlaceAction, fetchReviewCommentsAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/store';
+import { useEffect } from 'react';
 
 import Header from '../../components/header/header';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PlaceGallery from '../../components/place-gallery/place-gallery';
 import PlaceHost from '../../components/place-host/place-host';
 import PlaceEquipment from '../../components/place-equipment/place-equipment';
@@ -12,22 +14,36 @@ import PlacesNearby from '../../components/places-nearby/places-nearby';
 import StarRating from '../../components/star-rating/star-rating';
 import PlaceFeatures from '../../components/place-features/place-features';
 import PlaceMap from '../../components/place-map/place-map';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import PlaceContent from '../../components/place-content/place-content';
 
-import { placesNearby } from '../../mocks/places-nearby';
-import { reviewComment } from '../../mocks/review-comments';
+function PlaceScreen(): JSX.Element | null {
+  const dispatch = useAppDispatch();
 
-function PlaceScreen(): JSX.Element {
-  const places = useAppSelector((state) => state.places);
+  const place = useAppSelector((state) => state.currentPlace);
+  const placesNearby = useAppSelector((state) => state.placesNearby);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const reviewComments = useAppSelector((state) => state.reviewComments);
+
   const id = Number(useParams().id);
-  const place = places.find((element) => element.id === id);
 
-  if (!place) {
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchPlaceAction(id));
+      dispatch(fetchNearbyPlacesAction(id));
+      dispatch(fetchReviewCommentsAction(id));
+    }
+  }, [dispatch, id]);
+
+
+  if (!place && isDataLoaded) {
     return (
       <NotFoundScreen />
     );
   }
 
   return (
+    place &&
     <div className="page">
       <Helmet>
         <title>{place.title}</title>
@@ -35,7 +51,7 @@ function PlaceScreen(): JSX.Element {
       </Helmet>
       <Header />
       <main className="page__main page__main--property">
-        <section className="property">
+        <PlaceContent>
           <PlaceGallery images={place.images} />
           <div className="property__container container">
             <div className="property__wrapper">
@@ -51,7 +67,7 @@ function PlaceScreen(): JSX.Element {
               </div>
               <PlaceEquipment goods={place.goods} />
               <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews reviewComments={reviewComment} />
+              <PlaceReviews reviewComments={reviewComments} />
             </div>
           </div>
           <div className="container">
@@ -63,7 +79,7 @@ function PlaceScreen(): JSX.Element {
               scrollZoom={false}
             />
           </div>
-        </section>
+        </PlaceContent>
         <PlacesNearby placesNearby={placesNearby} />
       </main>
     </div>

@@ -54,6 +54,11 @@ export type ReviewComment = {
   };
 };
 
+export type NewReviewComment = {
+  comment: string;
+  rating: number;
+};
+
 export type AuthData = {
   email: string;
   password: string;

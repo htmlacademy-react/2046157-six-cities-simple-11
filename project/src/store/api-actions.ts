@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction } from './actions';
+import { getPlacesAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getCurrentPlaceAction, getNearbyPlacesAction, getReviewCommentsAction } from './actions';
 import { saveToken, dropToken } from '../services/token';
 
-import { Place, AuthData, UserData } from '../types/data';
+import { Place, AuthData, UserData, ReviewComment, NewReviewComment } from '../types/data';
 import { APIRoute, AuthorizationStatus } from '../consts';
 
 export const fetchPlacesAction = createAsyncThunk<void, undefined, {
@@ -20,6 +20,68 @@ export const fetchPlacesAction = createAsyncThunk<void, undefined, {
 
     dispatch(getPlacesAction(data));
     dispatch(setDataLoadingStatusAction(true));
+  },
+);
+
+export const fetchPlaceAction = createAsyncThunk<void, Place['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchPlace',
+  async (id, { dispatch, extra: api }) => {
+    try {
+      dispatch(setDataLoadingStatusAction(false));
+
+      const { data } = await api.get<Place>(`${APIRoute.Hotels}/${id}`);
+
+      dispatch(getCurrentPlaceAction(data));
+      dispatch(setDataLoadingStatusAction(true));
+    } catch {
+      dispatch(setDataLoadingStatusAction(true));
+    }
+  },
+);
+
+export const fetchNearbyPlacesAction = createAsyncThunk<void, Place['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchPlacesNearby',
+  async (id, { dispatch, extra: api }) => {
+    const { data } = await api.get<Place[]>(`${APIRoute.Hotels}/${id}/nearby`);
+
+    dispatch(getNearbyPlacesAction(data));
+  },
+);
+
+export const fetchReviewCommentsAction = createAsyncThunk<void, Place['id'], {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReviewComments',
+  async (id, { dispatch, extra: api }) => {
+    const { data } = await api.get<ReviewComment[]>(`${APIRoute.Comments}/${id}`);
+
+    dispatch(getReviewCommentsAction(data));
+  },
+);
+
+export const fetchAddReviewCommentAction = createAsyncThunk<void, {
+  placeId: Place['id'];
+  newComment: NewReviewComment;
+}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchAddReviewComment',
+  async ({ placeId: id, newComment: { comment, rating } }, { dispatch, extra: api }) => {
+    const { data } = await api.post<ReviewComment[]>(`${APIRoute.Comments}/${id}`, { comment, rating });
+
+    dispatch(getReviewCommentsAction(data));
   },
 );
 

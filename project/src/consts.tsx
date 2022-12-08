@@ -1,13 +1,15 @@
 export enum AppRoute {
   Login = '/login',
   Place = '/offer',
-  Root = '/'
+  Root = '/',
+  NotFound = '*',
 }
 
 export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comments = '/comments'
 }
 
 export enum AuthorizationStatus {
@@ -78,8 +80,20 @@ export enum StatusCodeMapping {
   SERVICE_UNAVAILABLE = 503,
   GATEWAY_TIMEOUT = 504,
   BAD_REQUEST = 400,
+  NOT_FOUND = 404,
 }
 
 export const TIMEOUT_SHOW_ERROR = 4000;
 
 export const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+
+export const MIN_SYMBOLS_COUNT = 50;
+export const MAX_SYMBOLS_COUNT = 300;
+
+export const RatingGradation = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect'
+} as const;

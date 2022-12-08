@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useAppDispatch } from '../../hooks/store';
 import { fetchPlacesAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import { getCurrentPlaceAction } from '../../store/actions';
 
 import Header from '../../components/header/header';
 import CityContent from '../../components/city-content/city-content';
@@ -11,6 +12,7 @@ function MainScreen(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchPlacesAction());
+    dispatch(getCurrentPlaceAction(null));
   }, [dispatch]);
 
   return (

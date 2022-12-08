@@ -1,16 +1,20 @@
-import { UserData } from '../../types/data';
+import { AuthorizationStatus } from '../../consts';
+import { useAppSelector } from '../../hooks/store';
 
 type UserAuthInfoProps = {
-  user: UserData | null;
+  userStatus: string;
 }
 
-function UserAuthInfo({ user }: UserAuthInfoProps): JSX.Element {
+function UserAuthInfo({ userStatus }: UserAuthInfoProps): JSX.Element {
+  const user = useAppSelector((state) => state.user);
+  const isUser = userStatus === AuthorizationStatus.Auth && user;
+
   return (
     <div className="header__nav-profile">
       <div className="header__avatar-wrapper user__avatar-wrapper">
-        {user && <img style={{ borderRadius: '100%' }} src={user.avatarUrl} alt="avatar" />}
+        {isUser && <img style={{ borderRadius: '100%' }} src={user.avatarUrl} alt="avatar" />}
       </div>
-      {user && <span className="header__user-name user__name">{user.email}</span>}
+      {isUser && <span className="header__user-name user__name">{user.email}</span>}
     </div>
   );
 }

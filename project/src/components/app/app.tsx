@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -24,7 +24,7 @@ function App(): JSX.Element {
           }
           />
           <Route path={`${AppRoute.Place}/:id`} element={<PlaceScreen />} />
-          <Route path='*' element={<NotFoundScreen />} />
+          <Route path={AppRoute.NotFound} element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

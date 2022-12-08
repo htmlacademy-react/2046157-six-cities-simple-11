@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { selectCityAction, getPlacesAction, setSortTypeAction, setCurrentPlaceAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction } from '../store/actions';
+import { selectCityAction, getPlacesAction, setSortTypeAction, getCurrentPlaceAction, setDataLoadingStatusAction, requireAuthorizationAction, getUserAction, getNearbyPlacesAction, getReviewCommentsAction } from '../store/actions';
 
 import { CITIES, sortTypes, AuthorizationStatus } from '../consts';
-import { Place, City, UserData } from '../types/data';
+import { Place, City, UserData, ReviewComment } from '../types/data';
 
 type InitalState = {
   city: City;
@@ -12,6 +12,8 @@ type InitalState = {
   isDataLoaded: boolean;
   authorizationStatus: string;
   user: UserData | null;
+  placesNearby: Place[];
+  reviewComments: ReviewComment[];
 }
 
 const initialState: InitalState = {
@@ -22,6 +24,8 @@ const initialState: InitalState = {
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
+  placesNearby: [],
+  reviewComments: [],
 };
 
 const reducer = createReducer(initialState, (builer) => {
@@ -35,7 +39,7 @@ const reducer = createReducer(initialState, (builer) => {
     .addCase(setSortTypeAction, (state, action) => {
       state.placesSortType = action.payload;
     })
-    .addCase(setCurrentPlaceAction, (state, action) => {
+    .addCase(getCurrentPlaceAction, (state, action) => {
       state.currentPlace = action.payload;
     })
     .addCase(setDataLoadingStatusAction, (state, action) => {
@@ -46,6 +50,12 @@ const reducer = createReducer(initialState, (builer) => {
     })
     .addCase(getUserAction, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(getNearbyPlacesAction, (state, action) => {
+      state.placesNearby = action.payload;
+    })
+    .addCase(getReviewCommentsAction, (state, action) => {
+      state.reviewComments = action.payload;
     });
 });
 

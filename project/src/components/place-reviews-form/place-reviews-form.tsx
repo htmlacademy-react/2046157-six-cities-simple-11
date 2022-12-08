@@ -1,50 +1,63 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/store';
+import { fetchAddReviewCommentAction } from '../../store/api-actions';
 
 import PlaceReviewsFormRating from '../place-reviews-form-rating/place-reviews-form-rating';
 
+import { MIN_SYMBOLS_COUNT, MAX_SYMBOLS_COUNT, RatingGradation } from '../../consts';
+
 function PlaceReviewsForm(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const id = Number(useParams().id);
+
   const [formData, setFormData] = useState({
-    rating: '',
+    rating: 0,
     review: '',
-    date: new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })
+    selectedStarPosition: 0,
   });
 
-  const MIN_SYMBOLS_COUNT = 50;
+  function handleFormSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+
+    dispatch(fetchAddReviewCommentAction({ placeId: id, newComment: { rating: formData.rating, comment: formData.review } }));
+
+    setFormData({
+      rating: 0,
+      review: '',
+      selectedStarPosition: 0,
+    });
+  }
+
+  function handleFormChange(evt: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+    const { value, name } = evt.target;
+
+    if (evt.target.closest('[name=rating]')) {
+      setFormData({
+        ...formData,
+        [name]: Number(value),
+        selectedStarPosition: Number(value),
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  }
 
   type RatingGradationType = {
     [key: string]: string;
-  }
-
-  const RatingGradation: RatingGradationType = {
-    1: 'terribly',
-    2: 'badly',
-    3: 'not bad',
-    4: 'good',
-    5: 'perfect'
-  } as const;
-
-  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    return formData;
-  }
-
-  function handleFormChange(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
-    const { value, name } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
   }
 
   function getRatingStars(ratingObj: RatingGradationType) {
     return Object.entries(ratingObj).map(([ratingIndex, ratingDescription]): JSX.Element => (
       <PlaceReviewsFormRating
         handleRatingChangeEvent={handleFormChange}
-        ratingIndex={ratingIndex}
+        ratingIndex={Number(ratingIndex)}
         ratingDescription={ratingDescription}
         key={ratingIndex}
+        selectedStar={formData.selectedStarPosition}
       />
     )).reverse();
   }
@@ -61,7 +74,12 @@ function PlaceReviewsForm(): JSX.Element {
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
           stay with at least <b className="reviews__text-amount">{MIN_SYMBOLS_COUNT} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(formData.rating && formData.review.length >= MIN_SYMBOLS_COUNT)}>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!(formData.rating && (formData.review.length >= MIN_SYMBOLS_COUNT && formData.review.length <= MAX_SYMBOLS_COUNT))}
+        >Submit
+        </button>
       </div>
     </form>
   );
