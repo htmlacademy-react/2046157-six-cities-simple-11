@@ -7,9 +7,14 @@ export type PlacesData = {
   places: Place[];
   currentPlace: null | Place;
   isDataLoaded: boolean;
+  hasError: boolean;
+}
+
+export type PlaceData = {
+  place: null | Place;
   placesNearby: Place[];
   reviewComments: ReviewComment[];
-  hasError: boolean;
+  hasError: boolean | string | undefined;
 }
 
 export type UserProcess = {

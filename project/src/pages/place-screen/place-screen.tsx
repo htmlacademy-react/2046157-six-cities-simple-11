@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from '../../hooks/store';
 import { fetchNearbyPlacesAction, fetchPlaceAction, fetchReviewCommentsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
-import { getCurrenPlace, getDataLoadedSatus, getNearbyPlaces, getReviewComments } from '../../store/places-data/selectors';
+import { getPlace, getNearbyPlaces, getReviewComments, getErrorStatus } from '../../store/place-data/selectors';
 
 import Header from '../../components/header/header';
 import PlaceGallery from '../../components/place-gallery/place-gallery';
@@ -19,10 +19,11 @@ import PlaceContent from '../../components/place-content/place-content';
 
 function PlaceScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
-  const place = useAppSelector(getCurrenPlace);
+
+  const place = useAppSelector(getPlace);
   const placesNearby = useAppSelector(getNearbyPlaces);
-  const isDataLoaded = useAppSelector(getDataLoadedSatus);
   const reviewComments = useAppSelector(getReviewComments);
+  const hasError = useAppSelector(getErrorStatus);
   const id = Number(useParams().id);
 
   useEffect(() => {
@@ -33,53 +34,53 @@ function PlaceScreen(): JSX.Element | null {
     }
   }, [dispatch, id]);
 
-
-  if (!place && isDataLoaded) {
+  if (hasError === 'Request failed with status code 404') {
     return (
       <NotFoundScreen />
     );
   }
 
   return (
-    place &&
     <div className="page">
-      <Helmet>
-        <title>{place.title}</title>
-        <meta name="descripton" content={place.description}></meta>
-      </Helmet>
+      {place &&
+        <Helmet>
+          <title>{place.title}</title>
+          <meta name="descripton" content={place.description}></meta>
+        </Helmet>}
       <Header />
-      <main className="page__main page__main--property">
-        <PlaceContent>
-          <PlaceGallery images={place.images} />
-          <div className="property__container container">
-            <div className="property__wrapper">
-              {place.isPremium && <div className="property__mark"><span>Premium</span></div>}
-              <div className="property__name-wrapper">
-                <h1 className="property__name">{place.title}</h1>
+      {place &&
+        <main className="page__main page__main--property">
+          <PlaceContent>
+            <PlaceGallery images={place.images} />
+            <div className="property__container container">
+              <div className="property__wrapper">
+                {place.isPremium && <div className="property__mark"><span>Premium</span></div>}
+                <div className="property__name-wrapper">
+                  <h1 className="property__name">{place.title}</h1>
+                </div>
+                <StarRating rating={place.rating} blockName={'property'} showRatingValue />
+                <PlaceFeatures place={place} />
+                <div className="property__price">
+                  <b className="property__price-value">&euro;{place.price}</b>
+                  <span className="property__price-text">&nbsp;night</span>
+                </div>
+                <PlaceEquipment goods={place.goods} />
+                <PlaceHost host={place.host} description={place.description} />
+                <PlaceReviews reviewComments={reviewComments} />
               </div>
-              <StarRating rating={place.rating} blockName={'property'} showRatingValue />
-              <PlaceFeatures place={place} />
-              <div className="property__price">
-                <b className="property__price-value">&euro;{place.price}</b>
-                <span className="property__price-text">&nbsp;night</span>
-              </div>
-              <PlaceEquipment goods={place.goods} />
-              <PlaceHost host={place.host} description={place.description} />
-              <PlaceReviews reviewComments={reviewComments} />
             </div>
-          </div>
-          <div className="container">
-            <PlaceMap
-              places={placesNearby}
-              city={place.city}
-              currentPlace={place}
-              parentClassName={'property'}
-              scrollZoom={false}
-            />
-          </div>
-        </PlaceContent>
-        <PlacesNearby placesNearby={placesNearby} />
-      </main>
+            <div className="container">
+              <PlaceMap
+                places={placesNearby}
+                city={place.city}
+                currentPlace={place}
+                parentClassName={'property'}
+                scrollZoom={false}
+              />
+            </div>
+          </PlaceContent>
+          <PlacesNearby placesNearby={placesNearby} />
+        </main>}
     </div>
   );
 }

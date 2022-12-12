@@ -20,6 +20,7 @@ export enum AuthorizationStatus {
 
 export enum NameSpace {
   PlacesData = 'PLACES_DATA',
+  PlaceData = 'PLACE_DATA',
   PlacesProcess = 'PLACES_PROCESS',
   User = 'USER'
 }
