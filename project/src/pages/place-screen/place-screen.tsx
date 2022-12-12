@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks/store';
+import { useAppSelector, useAppDispatch } from '../../hooks/store';
 import { fetchNearbyPlacesAction, fetchPlaceAction, fetchReviewCommentsAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks/store';
 import { useEffect } from 'react';
+import { getCurrenPlace, getDataLoadedSatus, getNearbyPlaces, getReviewComments } from '../../store/places-data/selectors';
 
 import Header from '../../components/header/header';
 import PlaceGallery from '../../components/place-gallery/place-gallery';
@@ -19,12 +19,10 @@ import PlaceContent from '../../components/place-content/place-content';
 
 function PlaceScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
-
-  const place = useAppSelector((state) => state.currentPlace);
-  const placesNearby = useAppSelector((state) => state.placesNearby);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
-  const reviewComments = useAppSelector((state) => state.reviewComments);
-
+  const place = useAppSelector(getCurrenPlace);
+  const placesNearby = useAppSelector(getNearbyPlaces);
+  const isDataLoaded = useAppSelector(getDataLoadedSatus);
+  const reviewComments = useAppSelector(getReviewComments);
   const id = Number(useParams().id);
 
   useEffect(() => {

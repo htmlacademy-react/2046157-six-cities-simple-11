@@ -3,9 +3,11 @@ import { Icon, Layer, Marker } from 'leaflet';
 import { useAppSelector } from '../../hooks/store';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
+import { getCurrentPlace } from '../../store/places-process/selectors';
 
 import { City, Place } from '../../types/data';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../consts';
+
 
 type MapProps = {
   places: Place[];
@@ -31,7 +33,7 @@ function Map({ places, city, parentClassName, currentPlace, scrollZoom }: MapPro
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const markers = useRef<Layer[]>([]);
-  const currentPlaceFromState = useAppSelector((state) => state.currentPlace);
+  const currentPlaceFromState = useAppSelector(getCurrentPlace);
   const targetPlace = currentPlace ? currentPlace : currentPlaceFromState;
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks/store';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 import PlaceReviewsForm from '../place-reviews-form/place-reviews-form';
 import PlaceReviewsList from '../place-reviews-list/place-reviews-list';
@@ -11,7 +12,7 @@ type PlaceReviewsProps = {
 }
 
 function PlaceReviews({ reviewComments }: PlaceReviewsProps): JSX.Element {
-  const userStatus = useAppSelector((state) => state.authorizationStatus);
+  const userStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="property__reviews reviews">

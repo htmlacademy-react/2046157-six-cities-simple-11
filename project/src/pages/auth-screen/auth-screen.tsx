@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch } from '../../hooks/store';
-import { selectCityAction } from '../../store/actions';
+import { selectCity } from '../../store/places-process/places-process';
 
 import Header from '../../components/header/header';
 import AuthForm from '../../components/auth-form/auth-form';
@@ -18,7 +18,7 @@ function AuthScreen(): JSX.Element {
   const randomCity = CITIES[getRandomCityIndex(0, CITIES.length)];
 
   function handleClick() {
-    dispatch(selectCityAction(randomCity));
+    dispatch(selectCity(randomCity));
   }
 
   return (

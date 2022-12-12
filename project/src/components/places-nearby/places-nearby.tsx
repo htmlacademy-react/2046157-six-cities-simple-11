@@ -1,4 +1,5 @@
 import PlaceCard from '../place-card/place-card';
+
 import { Place } from '../../types/data';
 
 type PlacesNearbyProps = {

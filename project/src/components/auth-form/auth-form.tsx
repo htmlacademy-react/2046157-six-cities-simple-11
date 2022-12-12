@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/store';
-import { selectCityAction } from '../../store/actions';
 import { loginAction } from '../../store/api-actions';
+import { selectCity } from '../../store/places-process/places-process';
 
 import { CITIES } from '../../consts';
+
 
 function AuthForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -22,7 +23,7 @@ function AuthForm(): JSX.Element {
     e.preventDefault();
 
     dispatch(loginAction(userData));
-    dispatch(selectCityAction(CITIES[0]));
+    dispatch(selectCity(CITIES[0]));
   }
 
   return (

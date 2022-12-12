@@ -1,4 +1,6 @@
 import { useAppSelector } from '../../hooks/store';
+import { getPlacesSortType } from '../../store/places-process/selectors';
+import { getDataLoadedSatus, getErrorStatus } from '../../store/places-data/selectors';
 
 import PlaceCard from '../place-card/place-card';
 import Preloader from '../preloader/preloader';
@@ -29,14 +31,25 @@ function getSortedPlaces(type: string, arr: Place[]): Place[] {
 }
 
 function PlacesList({ places }: PlacesListProps): JSX.Element {
-  const sortType = useAppSelector((state) => state.placesSortType);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const sortType = useAppSelector(getPlacesSortType);
+  const isDataLoaded = useAppSelector(getDataLoadedSatus);
+  const hasError = useAppSelector(getErrorStatus);
+
+  function getPlacesList() {
+    if (!isDataLoaded && hasError) {
+      return null;
+    }
+
+    if (!isDataLoaded && !hasError) {
+      return <Preloader />;
+    }
+
+    return getSortedPlaces(sortType, places).map((place): JSX.Element => <PlaceCard place={place} key={place.id} parentClassName={'cities'} haveListeners />);
+  }
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {isDataLoaded
-        ? getSortedPlaces(sortType, places).map((place): JSX.Element => <PlaceCard place={place} key={place.id} parentClassName={'cities'} haveListeners />)
-        : <Preloader />}
+      {getPlacesList()}
     </div>
   );
 }

@@ -18,6 +18,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum NameSpace {
+  PlacesData = 'PLACES_DATA',
+  PlacesProcess = 'PLACES_PROCESS',
+  User = 'USER'
+}
+
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
@@ -85,7 +91,7 @@ export enum StatusCodeMapping {
 
 export const TIMEOUT_SHOW_ERROR = 4000;
 
-export const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+export const placesSortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 export const MIN_SYMBOLS_COUNT = 50;
 export const MAX_SYMBOLS_COUNT = 300;
