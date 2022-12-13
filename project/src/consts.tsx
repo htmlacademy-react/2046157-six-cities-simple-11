@@ -94,8 +94,10 @@ export const TIMEOUT_SHOW_ERROR = 4000;
 
 export const placesSortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
-export const MIN_SYMBOLS_COUNT = 50;
-export const MAX_SYMBOLS_COUNT = 300;
+export enum RequireSymbolsCount {
+  Min = 50,
+  Max = 300,
+}
 
 export const RatingGradation = {
   1: 'terribly',

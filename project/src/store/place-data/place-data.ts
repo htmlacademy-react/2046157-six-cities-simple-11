@@ -8,7 +8,7 @@ const initialState: PlaceData = {
   place: null,
   placesNearby: [],
   reviewComments: [],
-  hasError: false,
+  error: null,
 };
 
 export const placeData = createSlice({
@@ -18,13 +18,13 @@ export const placeData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPlaceAction.pending, (state) => {
-        state.hasError = false;
+        state.error = null;
       })
       .addCase(fetchPlaceAction.fulfilled, (state, action) => {
         state.place = action.payload;
       })
       .addCase(fetchPlaceAction.rejected, (state, action) => {
-        state.hasError = action.error.message;
+        state.error = action.error.message;
       })
       .addCase(fetchNearbyPlacesAction.fulfilled, (state, action) => {
         state.placesNearby = action.payload;

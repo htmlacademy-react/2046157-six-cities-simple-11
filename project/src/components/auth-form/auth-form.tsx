@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/store';
 import { loginAction } from '../../store/api-actions';
@@ -21,8 +22,14 @@ function AuthForm(): JSX.Element {
   function handleSubmitForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    dispatch(loginAction(userData));
-    dispatch(selectCity(CITIES[0]));
+    const regexp = /(\d[A-z])|([A-z]\d)/g;
+
+    if (regexp.test(userData.password)) {
+      dispatch(loginAction(userData));
+      dispatch(selectCity(CITIES[0]));
+    } else {
+      toast.warn('Password should have atleast one number and one letter');
+    }
   }
 
   return (

@@ -10,7 +10,7 @@ import PlaceContent from '../../components/place-content/place-content';
 
 function PlaceScreen(): JSX.Element | null {
   const dispatch = useAppDispatch();
-  const hasError = useAppSelector(getErrorStatus);
+  const error = useAppSelector(getErrorStatus);
   const id = Number(useParams().id);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function PlaceScreen(): JSX.Element | null {
     }
   }, [dispatch, id]);
 
-  return (hasError === 'Request failed with status code 404')
+  return (error === 'Request failed with status code 404')
     ? (<NotFoundScreen />)
     : (
       <div className="page">
