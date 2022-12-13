@@ -37,7 +37,7 @@ function PlacesList({ places }: PlacesListProps): JSX.Element {
 
   function getPlacesList() {
     if (!isDataLoaded && hasError) {
-      return null;
+      return <div style={{ color: 'red' }}>Something went wrong!</div>;
     }
 
     if (!isDataLoaded && !hasError) {
