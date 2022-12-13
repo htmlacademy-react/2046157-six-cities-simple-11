@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks/store';
-import { selectCityAction } from '../../store/actions';
+import { selectCity } from '../../store/places-process/places-process';
 import './cities-tabs.css';
 
 import { CITIES } from '../../consts';
@@ -13,7 +13,7 @@ function CitiesTabs({ currentCity }: CitiesTabsProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   function handleClick(city: City) {
-    dispatch(selectCityAction(city));
+    dispatch(selectCity(city));
   }
 
   return (

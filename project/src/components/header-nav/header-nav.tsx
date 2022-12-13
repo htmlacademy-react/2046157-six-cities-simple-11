@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import { useAppSelector, useAppDispatch } from '../../hooks/store';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 import UserAuthInfo from '../user-auth-info/user-auth-info';
 
 function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
-  const userStatus = useAppSelector((state) => state.authorizationStatus);
+  const userStatus = useAppSelector(getAuthorizationStatus);
 
   function handleClick(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     evt.preventDefault();

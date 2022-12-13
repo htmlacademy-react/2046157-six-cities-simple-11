@@ -1,12 +1,13 @@
 import { useAppSelector, useAppDispatch } from '../../hooks/store';
 import { useEffect, useState } from 'react';
-import { setSortTypeAction } from '../../store/actions';
+import { setSortType } from '../../store/places-process/places-process';
+import { getPlacesSortType } from '../../store/places-process/selectors';
 
-import { sortTypes } from '../../consts';
+import { placesSortTypes } from '../../consts';
 
 function PlacesSortTab(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const sortType = useAppSelector((state) => state.placesSortType);
+  const sortType = useAppSelector(getPlacesSortType);
   const dispatch = useAppDispatch();
 
   function handleMenuClick() {
@@ -14,7 +15,7 @@ function PlacesSortTab(): JSX.Element {
   }
 
   function handleMenuItemClick(type: string) {
-    dispatch(setSortTypeAction(type));
+    dispatch(setSortType(type));
     handleMenuClick();
   }
 
@@ -44,7 +45,7 @@ function PlacesSortTab(): JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOpen ? 'places__options--opened' : ''}`}>
-        {sortTypes.map((type) => (
+        {placesSortTypes.map((type) => (
           <li
             onClick={() => handleMenuItemClick(type)}
             key={type}

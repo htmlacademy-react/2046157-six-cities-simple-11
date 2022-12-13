@@ -1,17 +1,15 @@
 import { useAppSelector } from '../../hooks/store';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getReviewComments } from '../../store/place-data/selectors';
 
 import PlaceReviewsForm from '../place-reviews-form/place-reviews-form';
 import PlaceReviewsList from '../place-reviews-list/place-reviews-list';
 
-import { ReviewComment } from '../../types/data';
 import { AuthorizationStatus } from '../../consts';
 
-type PlaceReviewsProps = {
-  reviewComments: ReviewComment[];
-}
-
-function PlaceReviews({ reviewComments }: PlaceReviewsProps): JSX.Element {
-  const userStatus = useAppSelector((state) => state.authorizationStatus);
+function PlaceReviews(): JSX.Element {
+  const userStatus = useAppSelector(getAuthorizationStatus);
+  const reviewComments = useAppSelector(getReviewComments);
 
   return (
     <section className="property__reviews reviews">

@@ -1,12 +1,13 @@
 import { AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks/store';
+import { getUser } from '../../store/user-process/selectors';
 
 type UserAuthInfoProps = {
   userStatus: string;
 }
 
 function UserAuthInfo({ userStatus }: UserAuthInfoProps): JSX.Element {
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(getUser);
   const isUser = userStatus === AuthorizationStatus.Auth && user;
 
   return (

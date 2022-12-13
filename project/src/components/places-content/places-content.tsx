@@ -1,7 +1,7 @@
 import PlacesList from '../places-list/places-list';
 import PlacesSortTab from '../places-sort-tab/places-sort-tab';
-import pluralize from '../../utils/pluralize';
 
+import pluralize from '../../utils/pluralize';
 import { Place, City } from '../../types/data';
 
 type PlacesContentProps = {

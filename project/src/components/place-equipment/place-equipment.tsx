@@ -3,13 +3,11 @@ type PlaceEquipmentProps = {
 }
 
 function PlaceEquipment({ goods }: PlaceEquipmentProps): JSX.Element {
-  let id = 1;
-
   return (
     <div className="property__inside">
       <h2 className="property__inside-title">What&apos;s inside</h2>
       <ul className="property__inside-list">
-        {goods.map((stuff): JSX.Element => <li className="property__inside-item" key={id++}>{stuff}</li>)}
+        {goods.map((stuff): JSX.Element => <li className="property__inside-item" key={stuff}>{stuff}</li>)}
       </ul>
     </div>
   );

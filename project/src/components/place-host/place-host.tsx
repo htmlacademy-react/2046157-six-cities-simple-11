@@ -5,7 +5,6 @@ type PlaceHostProps = {
   description: Place['description'];
 }
 
-
 function PlaceHost({ host, description }: PlaceHostProps): JSX.Element {
   return (
     <div className="property__host">

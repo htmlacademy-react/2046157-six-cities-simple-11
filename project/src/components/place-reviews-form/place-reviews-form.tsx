@@ -5,7 +5,7 @@ import { fetchAddReviewCommentAction } from '../../store/api-actions';
 
 import PlaceReviewsFormRating from '../place-reviews-form-rating/place-reviews-form-rating';
 
-import { MIN_SYMBOLS_COUNT, MAX_SYMBOLS_COUNT, RatingGradation } from '../../consts';
+import { RequireSymbolsCount, RatingGradation } from '../../consts';
 
 function PlaceReviewsForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -72,12 +72,12 @@ function PlaceReviewsForm(): JSX.Element {
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
-          stay with at least <b className="reviews__text-amount">{MIN_SYMBOLS_COUNT} characters</b>.
+          stay with at least <b className="reviews__text-amount">{RequireSymbolsCount.Min} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!(formData.rating && (formData.review.length >= MIN_SYMBOLS_COUNT && formData.review.length <= MAX_SYMBOLS_COUNT))}
+          disabled={!(formData.rating && (formData.review.length >= RequireSymbolsCount.Min && formData.review.length <= RequireSymbolsCount.Max))}
         >Submit
         </button>
       </div>

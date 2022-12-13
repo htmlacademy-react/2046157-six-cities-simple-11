@@ -17,14 +17,7 @@ export type Place = {
   };
   images: string[];
   maxAdults: number;
-  city: {
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-    name: string;
-  };
+  city: City;
   location: {
     latitude: number;
     longitude: number;
