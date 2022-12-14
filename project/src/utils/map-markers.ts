@@ -3,7 +3,7 @@ import { BaseIconOptions } from 'leaflet';
 
 type MarkerParamsEnum = typeof MarkerParams;
 
-export function setMarkerParams(markerSize: MarkerParamsEnum['Size'], url: string): BaseIconOptions {
+export default function setMarkerParams(markerSize: MarkerParamsEnum['Size'], url: string): BaseIconOptions {
   return {
     iconUrl: url,
     iconSize: [markerSize.Width, markerSize.Height],

@@ -3,11 +3,11 @@ import { Icon, Layer, Marker } from 'leaflet';
 import { useAppSelector } from '../../hooks/store';
 import useMap from '../../hooks/use-map';
 import { getCurrentPlace } from '../../store/places-process/selectors';
-import { setMarkerParams } from '../../utils/map-markers';
 import 'leaflet/dist/leaflet.css';
 
 import { City, Place } from '../../types/data';
 import { MarkerParams } from '../../consts';
+import setMarkerParams from '../../utils/map-markers';
 
 type MapProps = {
   places: Place[];

@@ -6,6 +6,7 @@ import StarRating from '../star-rating/star-rating';
 
 import { AppRoute } from '../../consts';
 import { Place } from '../../types/data';
+import capitalizeFirstLetter from '../../utils/capitalize';
 
 type PlaceCardProps = {
   place: Place;
@@ -36,7 +37,6 @@ function PlaceCard({ place, parentClassName, haveListeners }: PlaceCardProps): J
     };
   }
 
-
   return (
     <article {...eventHandlers} className={`${parentClassName}__card place-card`}>
       {place.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
@@ -56,7 +56,7 @@ function PlaceCard({ place, parentClassName, haveListeners }: PlaceCardProps): J
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Place}/${place.id}`}>{place.title}</Link>
         </h2>
-        <p className="place-card__type">{place.type}</p>
+        <p className="place-card__type">{capitalizeFirstLetter(place.type)}</p>
       </div>
     </article>
   );
