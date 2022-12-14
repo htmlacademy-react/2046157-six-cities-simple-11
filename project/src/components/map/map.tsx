@@ -1,13 +1,13 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Layer, Marker } from 'leaflet';
 import { useAppSelector } from '../../hooks/store';
-import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import { getCurrentPlace } from '../../store/places-process/selectors';
+import { setMarkerParams } from '../../utils/map-markers';
+import 'leaflet/dist/leaflet.css';
 
 import { City, Place } from '../../types/data';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../consts';
-
+import { MarkerParams } from '../../consts';
 
 type MapProps = {
   places: Place[];
@@ -17,17 +17,8 @@ type MapProps = {
   currentPlace?: Place;
 }
 
-const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
-const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
+const defaultCustomIcon = new Icon(setMarkerParams(MarkerParams.Size, MarkerParams.Url.Default));
+const currentCustomIcon = new Icon(setMarkerParams(MarkerParams.Size, MarkerParams.Url.Active));
 
 function Map({ places, city, parentClassName, currentPlace, scrollZoom }: MapProps): JSX.Element {
   const mapRef = useRef(null);

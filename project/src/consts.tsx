@@ -25,11 +25,16 @@ export enum NameSpace {
   User = 'USER'
 }
 
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const MarkerParams = {
+  Url: {
+    Default: 'img/pin.svg',
+    Active: 'img/pin-active.svg',
+  },
+  Size: {
+    Width: 27,
+    Height: 39,
+  }
+} as const;
 
 export const CITIES = [
   {
@@ -89,8 +94,6 @@ export enum StatusCodeMapping {
   BAD_REQUEST = 400,
   NOT_FOUND = 404,
 }
-
-export const TIMEOUT_SHOW_ERROR = 4000;
 
 export const placesSortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
