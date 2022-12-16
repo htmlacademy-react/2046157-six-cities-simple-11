@@ -7,6 +7,10 @@ import PlaceReviewsFormRating from '../place-reviews-form-rating/place-reviews-f
 
 import { RequireSymbolsCount, RatingGradation } from '../../consts';
 
+type RatingGradationType = {
+  [key: string]: string;
+}
+
 function PlaceReviewsForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const id = Number(useParams().id);
@@ -32,7 +36,7 @@ function PlaceReviewsForm(): JSX.Element {
   function handleFormChange(evt: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
     const { value, name } = evt.target;
 
-    if (evt.target.closest('[name=rating]')) {
+    if (evt.target.name === 'rating') {
       setFormData({
         ...formData,
         [name]: Number(value),
@@ -44,10 +48,6 @@ function PlaceReviewsForm(): JSX.Element {
         [name]: value,
       });
     }
-  }
-
-  type RatingGradationType = {
-    [key: string]: string;
   }
 
   function getRatingStars(ratingObj: RatingGradationType) {
