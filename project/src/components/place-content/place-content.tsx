@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/store';
-import { getPlace, getNearbyPlaces } from '../../store/place-data/selectors';
+import { getNearbyPlaces } from '../../store/place-data/selectors';
+import { Place } from '../../types/data';
 
 import PlaceEquipment from '../place-equipment/place-equipment';
 import PlaceFeatures from '../place-features/place-features';
@@ -11,8 +12,11 @@ import PlaceReviews from '../place-reviews/place-reviews';
 import PlacesNearby from '../places-nearby/places-nearby';
 import StarRating from '../star-rating/star-rating';
 
-function PlaceContent(): JSX.Element | null {
-  const place = useAppSelector(getPlace);
+type PlaceContentProps = {
+  place: Place | null;
+}
+
+function PlaceContent({ place }: PlaceContentProps): JSX.Element | null {
   const placesNearby = useAppSelector(getNearbyPlaces);
 
   return (
