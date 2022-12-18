@@ -6,3 +6,4 @@ export const getPlace = (state: State): Place | null => state[NameSpace.PlaceDat
 export const getNearbyPlaces = (state: State): Place[] => state[NameSpace.PlaceData].placesNearby;
 export const getReviewComments = (state: State): ReviewComment[] => state[NameSpace.PlaceData].reviewComments;
 export const getLoadingStatus = (state: State): boolean => state[NameSpace.PlaceData].hasLoaded;
+export const getReviewCommentStatus = (state: State): string => state[NameSpace.PlaceData].reviewCommentStatus;

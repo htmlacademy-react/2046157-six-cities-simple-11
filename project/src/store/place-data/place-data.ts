@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchAddReviewCommentAction, fetchNearbyPlacesAction, fetchPlaceAction, fetchReviewCommentsAction } from '../api-actions';
 
-import { NameSpace } from '../../consts';
+import { NameSpace, ReviewCommentStatus } from '../../consts';
 import { PlaceData } from '../../types/state';
 
 const initialState: PlaceData = {
@@ -9,6 +9,7 @@ const initialState: PlaceData = {
   placesNearby: [],
   reviewComments: [],
   hasLoaded: false,
+  reviewCommentStatus: ReviewCommentStatus.Unknown,
 };
 
 export const placeData = createSlice({
@@ -33,8 +34,15 @@ export const placeData = createSlice({
       .addCase(fetchReviewCommentsAction.fulfilled, (state, action) => {
         state.reviewComments = action.payload;
       })
+      .addCase(fetchAddReviewCommentAction.pending, (state) => {
+        state.reviewCommentStatus = ReviewCommentStatus.Unknown;
+      })
       .addCase(fetchAddReviewCommentAction.fulfilled, (state, action) => {
+        state.reviewCommentStatus = ReviewCommentStatus.Sucess;
         state.reviewComments = action.payload;
+      })
+      .addCase(fetchAddReviewCommentAction.rejected, (state) => {
+        state.reviewCommentStatus = ReviewCommentStatus.Fail;
       });
   }
 });

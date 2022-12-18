@@ -18,6 +18,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum ReviewCommentStatus {
+  Sucess = 'SUCCESS',
+  Unknown = 'UNKNOWN',
+  Fail = 'FAIL'
+}
+
 export enum NameSpace {
   PlacesData = 'PLACES_DATA',
   PlaceData = 'PLACE_DATA',

@@ -15,6 +15,7 @@ export type PlaceData = {
   placesNearby: Place[];
   reviewComments: ReviewComment[];
   hasLoaded: boolean;
+  reviewCommentStatus: string;
 }
 
 export type UserProcess = {
