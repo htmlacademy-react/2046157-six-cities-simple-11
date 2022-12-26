@@ -1,9 +1,11 @@
 import { address, datatype, lorem, internet, name, image, date } from 'faker';
 import { placesSortTypes } from './consts';
 
-import { City, Place, ReviewComment } from './types/data';
+import { City, Place, ReviewComment, UserData } from './types/data';
 
-export const makeMockSortType = () => placesSortTypes[Math.floor(Math.random() * placesSortTypes.length)];
+export const makeMockSortType = (): string => placesSortTypes[Math.floor(Math.random() * placesSortTypes.length)];
+
+export const makeMockId = () => datatype.number({ min: 1, max: 100 });
 
 export const makeMockCity = (): City => ({
   name: address.city(),
@@ -14,16 +16,16 @@ export const makeMockCity = (): City => ({
   },
 });
 
-export const makeMockUser = () => ({
+export const makeMockUser = (): Omit<UserData, 'email' | 'token'> => ({
   avatarUrl: internet.avatar(),
-  id: datatype.number(),
+  id: makeMockId(),
   isPro: datatype.boolean(),
   name: name.findName(),
 });
 
-export const makeMockAppUser = () => ({
+export const makeMockAppUser = (): UserData => ({
   avatarUrl: internet.avatar(),
-  id: datatype.number(),
+  id: makeMockId(),
   isPro: datatype.boolean(),
   name: name.findName(),
   token: datatype.uuid(),
@@ -36,7 +38,7 @@ export const makeMockPlace = (): Place => ({
   description: lorem.text(),
   goods: [datatype.string(), datatype.string(), datatype.string()],
   host: makeMockUser(),
-  id: datatype.number(),
+  id: makeMockId(),
   images: [image.cats(200, 200), image.cats(200, 200)],
   isPremium: datatype.boolean(),
   location: {
@@ -55,7 +57,7 @@ export const makeMockPlace = (): Place => ({
 export const makeMockReviewComment = (): ReviewComment => ({
   comment: lorem.text(),
   date: date.future().toISOString(),
-  id: datatype.number(),
+  id: makeMockId(),
   rating: datatype.number(),
   user: makeMockUser(),
 });
