@@ -1,14 +1,13 @@
 import { useAppSelector } from '../../hooks/store';
 import { getCity } from '../../store/places-process/selectors';
-import { getPlaces } from '../../store/places-data/selectors';
+import { getFilteredPlaces } from '../../store/places-data/selectors';
 
 import CityPlaces from '../city-places/city-places';
 import CitiesTabs from '../cities-tabs/cities-tabs';
 
 function CityContent(): JSX.Element {
   const currentCity = useAppSelector(getCity);
-  const places = useAppSelector(getPlaces);
-  const cityPlaces = places.filter((place) => place.city.name === currentCity.name);
+  const cityPlaces = useAppSelector(getFilteredPlaces);
 
   return (
     <main className={`page__main page__main--index ${cityPlaces.length ? '' : 'page__main--index-empty'}`}>

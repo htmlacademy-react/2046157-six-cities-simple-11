@@ -16,7 +16,7 @@ function HeaderNav(): JSX.Element {
   }
 
   return (
-    <nav className="header__nav">
+    <nav data-testid="header-nav" className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
           <UserAuthInfo userStatus={userStatus} />

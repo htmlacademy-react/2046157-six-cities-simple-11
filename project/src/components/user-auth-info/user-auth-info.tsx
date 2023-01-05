@@ -11,11 +11,11 @@ function UserAuthInfo({ userStatus }: UserAuthInfoProps): JSX.Element {
   const isUser = userStatus === AuthorizationStatus.Auth && user;
 
   return (
-    <div className="header__nav-profile">
+    <div data-testid="header-nav-profile" className="header__nav-profile">
       <div className="header__avatar-wrapper user__avatar-wrapper">
         {isUser && <img style={{ borderRadius: '100%' }} src={user.avatarUrl} alt="avatar" />}
       </div>
-      {isUser && <span className="header__user-name user__name">{user.email}</span>}
+      {isUser && <span data-testid="header-nav-profile-user" className="header__user-name user__name">{user.email}</span>}
     </div>
   );
 }

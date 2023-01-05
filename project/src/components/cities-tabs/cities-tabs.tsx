@@ -21,7 +21,7 @@ function CitiesTabs({ currentCity }: CitiesTabsProps): JSX.Element {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (
-            <li className="locations__item" key={city.name} onClick={() => handleClick(city)}>
+            <li data-testid="cities-tabs-item" className="locations__item" key={city.name} onClick={() => handleClick(city)}>
               <button className={`locations__item-link tabs__item ${currentCity.name === city.name ? 'tabs__item--active' : ''}`}>
                 <span>{city.name}</span>
               </button>
